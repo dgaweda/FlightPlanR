@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanApi", "FlightPlanApi\FlightPlanApi.csproj", "{C6EBD197-FD35-4469-A23A-BEB6EECD923C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Api", "FlightPlanR.Api\FlightPlanR.Api.csproj", "{C6EBD197-FD35-4469-A23A-BEB6EECD923C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanApi.Common", "FlightPlanApi.Common\FlightPlanApi.Common.csproj", "{4EE47917-2FC2-4965-94CE-A4580D0ADE28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Common", "FlightPlanR.Common\FlightPlanR.Common.csproj", "{4EE47917-2FC2-4965-94CE-A4580D0ADE28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
