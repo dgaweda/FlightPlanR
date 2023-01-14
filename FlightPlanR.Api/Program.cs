@@ -1,7 +1,14 @@
-using FlightPlanApi.Middleware;
 using FlightPlanR.DataAccess;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders();
+builder.Host.UseSerilog((context, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .WriteTo.Console();
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -27,7 +34,6 @@ app.UseCors(config =>
         .AllowAnyHeader();
 });
 
-app.UseMiddlewares();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
