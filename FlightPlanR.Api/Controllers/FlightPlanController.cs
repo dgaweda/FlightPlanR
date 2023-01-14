@@ -1,15 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace FlightPlanApi.Controllers
+namespace FlightPlanApi.Controllers;
+public class FlightPlanController : BaseController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class FlightPlanController : ControllerBase
-    {
-    }
 }
+

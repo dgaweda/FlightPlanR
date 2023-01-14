@@ -14,11 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\FlightPlanR.Common\FlightPlanR.Common.csproj" />
+      <ProjectReference Include="..\FlightPlanR.DataAccess\FlightPlanR.DataAccess.csproj" />
     </ItemGroup>
 
 </Project>

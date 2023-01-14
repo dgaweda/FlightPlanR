@@ -1,3 +1,5 @@
+using FlightPlanR.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -6,6 +8,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 var app = builder.Build();
+var configuration = app.Configuration;
+
+builder.Services.AddDataAccessDI(configuration);
 
 if (app.Environment.IsDevelopment())
 {
