@@ -1,15 +1,11 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
-using FlightPlanApi.Common;
-using FlightPlanApi.Common.Enums;
+﻿using FlightPlanApi.Common;
 using MongoDB.Bson;
 
 namespace FlightPlanApi.Models;
 
 public class BaseDocument<T> where T : new()
 {
-    protected T? FromBsonToModel(BsonDocument? document)
+    public T FromBsonToModel(BsonDocument? document)
     {
         var model = new T();
         var propertyNames = model.GetJsonPropertyNames();

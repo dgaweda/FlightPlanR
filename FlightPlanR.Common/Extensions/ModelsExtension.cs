@@ -15,8 +15,7 @@ public static class ModelsExtension
             .ForEach(property =>
             { 
                 var jsonPropertyNameAttribute = property.GetCustomAttribute<JsonPropertyNameAttribute>();
-                var jsonPropertyName =
-                    jsonPropertyNameAttribute is null ? property.Name : jsonPropertyNameAttribute.Name;
+                var jsonPropertyName = jsonPropertyNameAttribute is null ? property.Name : jsonPropertyNameAttribute.Name;
                 propertiesDictionary.Add(jsonPropertyName, property.Name);
             });
 
@@ -25,16 +24,15 @@ public static class ModelsExtension
     
     public static void SetPropertyValue<T>(this T model, BsonValue bsonValue, PropertyInfo property)
     {
-        var propertyType = property.GetType();
-        switch(propertyType)
+        switch(property.PropertyType)
         {
-            case Type when propertyType == typeof(string): 
+            case Type pType when pType == typeof(string): 
                 property.SetValue(model, bsonValue.AsString);
                 break;
-            case Type when propertyType == typeof(int):
+            case Type pType when pType == typeof(int):
                 property.SetValue(model, bsonValue.AsInt32);
                 break;
-            case Type when propertyType == typeof(DateTime):
+            case Type pType when pType == typeof(DateTime):
                 property.SetValue(model, bsonValue.AsBsonDateTime.ToLocalTime());
                 break;
         };

@@ -1,3 +1,4 @@
+using FlightPlanApi.Middleware;
 using FlightPlanR.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,8 @@ app.UseCors(config =>
         .AllowAnyMethod()
         .AllowAnyHeader();
 });
+
+app.UseMiddlewares();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

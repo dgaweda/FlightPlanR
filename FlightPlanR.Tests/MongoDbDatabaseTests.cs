@@ -112,14 +112,48 @@ public class MongoDbDatabaseTests
     }
     #endregion
 
-    // [Fact]
-    // public void ConvertBsonToFlightPlan_WithBsonDoc_ConvertedFlightPlan()
-    // {
-    //     var mongoDbDatbase = new MongoDbDatabase();
-    //
-    //     var result = mongoDbDatbase.ConvertBsonToFlightPlan(new BsonDocument());
-    //
-    //     result.Should().BeOfType<FlightPlan>();
-    //     result.Should().Be(new FlightPlan());
-    // }
+    #region ConversionFromBsonToModel
+    [Fact]
+    public void ConvertBsonToFlightPlan_WithStringConversion_ConvertedFlightPlan()
+    {
+        var data = new Dictionary<string, object> { { "aircraft_type", "sample aircraft type" } };
+
+        var result = new FlightPlan().FromBsonToModel(new BsonDocument(data));
+    
+        result.Should().BeOfType<FlightPlan>();
+        result.AircraftType.Should().Be("sample aircraft type");
+    }
+    
+    [Fact]
+    public void ConvertBsonToFlightPlan_WithIntConversion_ConvertedFlightPlan()
+    {
+        var data = new Dictionary<string, object> { { "airspeed", 25 } };
+
+        var result = new FlightPlan().FromBsonToModel(new BsonDocument(data));
+    
+        result.Should().BeOfType<FlightPlan>();
+        result.AirSpeed.Should().Be(25);
+    }
+    
+    [Fact]
+    public void ConvertBsonToFlightPlan_FromBsonToDateTime_ConvertedFlightPlan()
+    {
+        var data = new Dictionary<string, object> { { "departure_time", new DateTime(2023, 1,1) } };
+
+        var result = new FlightPlan().FromBsonToModel(new BsonDocument(data));
+    
+        result.Should().BeOfType<FlightPlan>();
+        result.DepartureTime.Should().Be(new DateTime(2023, 1, 1));
+    }
+    
+    [Fact]
+    public void ConvertBsonToFlightPlan_WithInvalidPropertyTypeConversion_ConvertedFlightPlan()
+    {
+        var data = new Dictionary<string, object> { { "departure_time", 99 } };
+
+        var func = () => new FlightPlan().FromBsonToModel(new BsonDocument(data)).Should();
+        
+        func.Should().Throw<InvalidCastException>();
+    }
+    #endregion
 }
