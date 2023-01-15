@@ -2,12 +2,8 @@
 using FlightPlanApi.Common;
 using FlightPlanApi.Models;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
 using MongoDB.Driver;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using JsonReader = Newtonsoft.Json.JsonReader;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace FlightPlanR.DataAccess.Repository;
 
