@@ -7,11 +7,9 @@ namespace FlightPlanR.DataAccess;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDataAccessServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDataAccessDI(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<IMongoConfiguration, MongoConfiguration>();
-        services.Configure<IMongoConfiguration>(configuration.GetSection("Database:MongoDB"));
-        // services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.Configure<MongoConfiguration>(configuration.GetSection("Database:MongoDB").Bind);
         services.AddScoped<IFlightPlanRepository, FlightPlanRepository>();
         return services;
     }

@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.DataAccess", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Tests", "FlightPlanR.Tests\FlightPlanR.Tests.csproj", "{4685FB56-3F1E-4DE1-9E57-7F580CA3FA3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Application", "FlightPlanR.Application\FlightPlanR.Application.csproj", "{0198374F-9B07-4C65-8BBA-294FB6D5F69F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{4685FB56-3F1E-4DE1-9E57-7F580CA3FA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4685FB56-3F1E-4DE1-9E57-7F580CA3FA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4685FB56-3F1E-4DE1-9E57-7F580CA3FA3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0198374F-9B07-4C65-8BBA-294FB6D5F69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0198374F-9B07-4C65-8BBA-294FB6D5F69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0198374F-9B07-4C65-8BBA-294FB6D5F69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0198374F-9B07-4C65-8BBA-294FB6D5F69F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

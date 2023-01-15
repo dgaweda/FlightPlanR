@@ -1,4 +1,5 @@
 using FlightPlanApi.Middleware;
+using FlightPlanR.Application;
 using FlightPlanR.DataAccess;
 using Serilog;
 
@@ -14,8 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+
 // Add custom services to the container.
-builder.Services.AddDataAccessServices(builder.Configuration);
+builder.Services.AddDataAccessDI(builder.Configuration);
+builder.Services.AddApplicationDI();
 
 var app = builder.Build();
 

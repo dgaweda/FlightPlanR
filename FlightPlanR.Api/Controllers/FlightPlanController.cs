@@ -1,48 +1,51 @@
 
 using FlightPlanApi.Models;
+using FlightPlanR.Application.Services;
 using FlightPlanR.DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
 public class FlightPlanController : BaseController
 {
-    private readonly IFlightPlanRepository _flightPlanRepository;
+    private readonly IFlightPlanService _flightPlanService;
 
-    public FlightPlanController(IFlightPlanRepository flightPlanRepository)
+    public FlightPlanController(IFlightPlanService flightPlanService)
     {
-        _flightPlanRepository = flightPlanRepository;
+        _flightPlanService = flightPlanService;
     }
 
     [HttpGet]
     public async Task<IActionResult> FindAll()
     {
-        return Ok(await _flightPlanRepository.FindAllAsync());
+        var result = await _flightPlanService.FindAllAsync();
+        return Ok(result);
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> FindById([FromRoute] string id)
     {
-        return Ok(await _flightPlanRepository.FindByIdAsync(id));
+        var result = await _flightPlanService.FindByIdAsync(id);
+        return Ok(result);
     }
     
     [HttpPost]
     public async Task<IActionResult> Insert(FlightPlan flightPlan)
     {
-        await _flightPlanRepository.InsertAsync(flightPlan);
+        await _flightPlanService.InsertOneAsync(flightPlan);
         return Ok();
     }
     
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromRoute] string id, FlightPlan flightPlan)
+    [HttpPut]
+    public async Task<IActionResult> Update(FlightPlan flightPlan)
     {
-        await _flightPlanRepository.UpdateAsync(id, flightPlan);
+        await _flightPlanService.UpdateAsync(flightPlan);
         return Ok();
     }
     
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute] string id)
     {
-        await _flightPlanRepository.RemoveAsync(id);
+        await _flightPlanService.RemoveAsync(id);
         return Ok();
     }
     

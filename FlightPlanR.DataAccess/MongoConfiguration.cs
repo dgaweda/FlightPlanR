@@ -1,13 +1,6 @@
 ﻿namespace FlightPlanR.DataAccess;
 
-public interface IMongoConfiguration
-{
-    string ConnectionString { get; set; }
-    string Name { get; set; }
-    Dictionary<string, string> Collections { get; set; }
-}
-
-public class MongoConfiguration : IMongoConfiguration
+public class MongoConfiguration
 {
     public string ConnectionString { get; set; }
     public string Name { get; set; }
