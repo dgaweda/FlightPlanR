@@ -18,7 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FlightPlanR.Common\FlightPlanR.Common.csproj" />
-      <ProjectReference Include="..\FlightPlanR.DataAccess\FlightPlanR.DataAccess.csproj" />
+      <ProjectReference Include="..\FlightPlanR.Infrastructure\FlightPlanR.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

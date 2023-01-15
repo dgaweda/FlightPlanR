@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Api", "FlightPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Common", "FlightPlanR.Common\FlightPlanR.Common.csproj", "{4EE47917-2FC2-4965-94CE-A4580D0ADE28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.DataAccess", "FlightPlanR.DataAccess\FlightPlanR.DataAccess.csproj", "{631F6667-366C-4938-A645-29B2C525F402}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Infrastructure", "FlightPlanR.Infrastructure\FlightPlanR.Infrastructure.csproj", "{631F6667-366C-4938-A645-29B2C525F402}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanR.Tests", "FlightPlanR.Tests\FlightPlanR.Tests.csproj", "{4685FB56-3F1E-4DE1-9E57-7F580CA3FA3A}"
 EndProject

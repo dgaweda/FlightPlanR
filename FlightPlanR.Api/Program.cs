@@ -1,3 +1,4 @@
+using FlightPlanApi.Middleware;
 using FlightPlanR.DataAccess;
 using Serilog;
 
@@ -34,7 +35,7 @@ app.UseCors(config =>
         .AllowAnyHeader();
 });
 
-
+app.UseMiddlewares();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 

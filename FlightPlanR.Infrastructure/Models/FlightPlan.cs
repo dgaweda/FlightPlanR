@@ -5,7 +5,7 @@ using MongoDB.Bson;
 
 namespace FlightPlanApi.Models;
 
-public class FlightPlan : BaseDocument<FlightPlan>
+public class FlightPlan
 {
     [JsonPropertyName("flight_plan_id")]
     public string FlightPlanId { get; set; }

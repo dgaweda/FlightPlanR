@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
+using FlightPlanApi.Common;
 using FlightPlanApi.Common.Enums;
 using FlightPlanApi.Models;
 using MongoDB.Bson;
@@ -16,9 +17,18 @@ public class MongoDbDatabase : IDatabaseAdapter
         return database.GetCollection<BsonDocument>(collectionName);
     }
 
-    public Task<List<FlightPlan>> GetAllFlightPlans()
+    public async Task<List<FlightPlan>> GetAllFlightPlans()
     {
-        throw new NotImplementedException();
+        var collection = GetCollection("flightPlanner", "flight_plans");
+        var documents = await collection.Find(_ => true).ToListAsync();
+
+        var flightPlans = new List<FlightPlan>();
+        if (documents is null) return flightPlans;
+
+        foreach (var document in documents)
+        {
+            flightPlans.Add(ConvertFromBson);
+        }
     }
 
     public Task<FlightPlan> GetFlightPlanById(string flightPlanId)
