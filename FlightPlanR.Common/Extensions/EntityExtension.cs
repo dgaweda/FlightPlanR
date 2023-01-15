@@ -6,7 +6,7 @@ namespace FlightPlanApi.Common;
 
 public static class ModelsExtension
 {
-    public static Dictionary<string, string> GetJsonPropertyNames<T>(this T model)
+    public static Dictionary<string, string> GetEntityJsonPropertyNames<T>(this T model)
     {
         var propertiesDictionary = new Dictionary<string, string>();
         model?.GetType()
@@ -17,6 +17,22 @@ public static class ModelsExtension
                 var jsonPropertyNameAttribute = property.GetCustomAttribute<JsonPropertyNameAttribute>();
                 var jsonPropertyName = jsonPropertyNameAttribute is null ? property.Name : jsonPropertyNameAttribute.Name;
                 propertiesDictionary.Add(jsonPropertyName, property.Name);
+            });
+
+        return propertiesDictionary;
+    }
+    
+    public static Dictionary<string, string> GetEntityPropertyNames<T>(this T model)
+    {
+        var propertiesDictionary = new Dictionary<string, string>();
+        model?.GetType()
+            .GetProperties()
+            .ToList()
+            .ForEach(property =>
+            { 
+                var jsonPropertyNameAttribute = property.GetCustomAttribute<JsonPropertyNameAttribute>();
+                var jsonPropertyName = jsonPropertyNameAttribute is null ? property.Name : jsonPropertyNameAttribute.Name;
+                propertiesDictionary.Add(property.Name, jsonPropertyName);
             });
 
         return propertiesDictionary;

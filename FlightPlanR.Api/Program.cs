@@ -19,7 +19,7 @@ builder.Services.AddCors();
 var app = builder.Build();
 var configuration = app.Configuration;
 
-builder.Services.AddDataAccessDI(configuration);
+builder.Services.AddDataAccessServices(configuration);
 
 if (app.Environment.IsDevelopment())
 {
