@@ -16,15 +16,13 @@ public class FlightPlanController : BaseController
     [HttpGet]
     public async Task<IActionResult> FindAll()
     {
-        await _flightPlanRepository.FindAllAsync();
-        return Ok();
+        return Ok(await _flightPlanRepository.FindAllAsync());
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> FindById([FromRoute] string id)
     {
-        await _flightPlanRepository.FindByIdAsync(id);
-        return Ok();
+        return Ok(await _flightPlanRepository.FindByIdAsync(id));
     }
     
     [HttpPost]
@@ -46,6 +44,20 @@ public class FlightPlanController : BaseController
     {
         await _flightPlanRepository.RemoveAsync(id);
         return Ok();
+    }
+    
+    [HttpGet("route/{id}")]
+    public async Task<IActionResult> GetFlightPlanRoute([FromRoute] string id)
+    {
+        throw new NotImplementedException();
+        // TODO: implement method 
+    }
+    
+    [HttpGet("route/time/{id}")]
+    public async Task<IActionResult> GetFlightPlanTimeEnroute([FromRoute] string id)
+    {
+        throw new NotImplementedException();
+        // TODO: implement method
     }
 }
 

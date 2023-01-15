@@ -9,12 +9,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDataAccessServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var mongoConfiguration = new MongoConfiguration();
-        configuration.GetSection("Database.MongoDB").Bind(mongoConfiguration);
-        
         services.AddSingleton<IMongoConfiguration, MongoConfiguration>();
-        
-        services.AddScoped<IRepository<FlightPlan>, Repository<FlightPlan>>();
+        services.Configure<IMongoConfiguration>(configuration.GetSection("Database:MongoDB"));
+        // services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IFlightPlanRepository, FlightPlanRepository>();
         return services;
     }

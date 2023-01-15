@@ -7,20 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
-    loggerConfiguration
-        .WriteTo.Console();
+    loggerConfiguration.WriteTo.Console();
 });
 // Add Basic services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+// Add custom services to the container.
+builder.Services.AddDataAccessServices(builder.Configuration);
 
 var app = builder.Build();
-var configuration = app.Configuration;
-
-// Add custom services to the container.
-builder.Services.AddDataAccessServices(configuration);
 
 // Configure the HTTP Request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,9 +33,9 @@ app.UseCors(config =>
         .AllowAnyMethod()
         .AllowAnyHeader();
 });
-
 app.UseMiddlewares();
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.MapControllers();
 
 app.Run();

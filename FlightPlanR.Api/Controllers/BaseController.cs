@@ -2,7 +2,7 @@
 
 namespace FlightPlanApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class BaseController : ControllerBase
 {
