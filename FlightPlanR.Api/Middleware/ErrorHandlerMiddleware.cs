@@ -21,29 +21,34 @@ public class ErrorHandlerMiddleware
         catch (NotFoundException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            await context.Response.WriteAsync(CreateMessage(ex));
+            await context.Response.WriteAsync(ex.Message);
+            Console.WriteLine(CreateMessage(ex));
         }
         catch (NotUpdatedException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotModified;
-            await context.Response.WriteAsync(CreateMessage(ex));
+            await context.Response.WriteAsync(ex.Message);
+            Console.WriteLine(CreateMessage(ex));
             await _next.Invoke(context);
         }
         catch (NoContentException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NoContent;
-            await context.Response.WriteAsync(CreateMessage(ex));
+            await context.Response.WriteAsync(ex.Message);
+            Console.WriteLine(CreateMessage(ex));
             await _next.Invoke(context);
         }
         catch (BadRequestException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            await context.Response.WriteAsync(CreateMessage(ex));
+            await context.Response.WriteAsync(ex.Message);
+            Console.WriteLine(CreateMessage(ex));
         }
         catch (Exception ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            throw new Exception(CreateMessage(ex));
+            await context.Response.WriteAsync("Internal server error.");
+            Console.WriteLine(CreateMessage(ex));
         }
     }
 
