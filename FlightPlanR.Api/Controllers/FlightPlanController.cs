@@ -35,10 +35,10 @@ public class FlightPlanController : BaseController
         return Ok();
     }
     
-    [HttpPut]
-    public async Task<IActionResult> Update(FlightPlan flightPlan)
+    [HttpPut("{documentId}")]
+    public async Task<IActionResult> Update(string documentId, FlightPlan flightPlan)
     {
-        await _flightPlanService.UpdateAsync(flightPlan);
+        await _flightPlanService.UpdateAsync(documentId, flightPlan);
         return Ok();
     }
     

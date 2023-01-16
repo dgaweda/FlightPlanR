@@ -42,10 +42,10 @@ public class FlightPlanService : IFlightPlanService
         }
     }
 
-    public async Task UpdateAsync(FlightPlan flightPlan)
+    public async Task UpdateAsync(string id, FlightPlan flightPlan)
     {
-        var result = await _flightPlanRepository.UpdateAsync(flightPlan);
-        if (result.MatchedCount == 0 || result.ModifiedCount == 0)
+        var result = await _flightPlanRepository.UpdateAsync(id, flightPlan);
+        if (result is null && result?.MatchedCount == 0 || result?.ModifiedCount == 0)
         {
             throw new NotUpdatedException("No updates or element not found.");
         }

@@ -7,8 +7,13 @@ namespace FlightPlanApi.Models;
 public abstract class BaseEntity
 {
     [BsonId]
-    public ObjectId? ObjectId { get; set; }
+    public ObjectId ObjectId { get; set; }
 
-    [BsonElement("id")]
-    public string Id { get; } = Guid.NewGuid().ToString("N");
+    [BsonElement("document_id")] 
+    public string? Id { get; set; }
+
+    public void NewDocumentId()
+    {
+        Id = Guid.NewGuid().ToString("N");
+    }
 }
