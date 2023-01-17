@@ -46,7 +46,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     {
         var collection = GetCollection(CollectionName);
         var flightPlanCursor = await collection
-            .FindAsync(Builders<BsonDocument>.Filter.Eq("document_id", id));
+            .FindAsync(Builders<BsonDocument>.Filter.Eq("id", id));
         var document = await flightPlanCursor.FirstOrDefaultAsync();
         
         if (document is null) return null;
@@ -66,7 +66,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     public virtual async Task<UpdateResult> UpdateAsync(string id, TEntity entity)
     {
         var collection = GetCollection(CollectionName);
-        var documentToUpdate = Builders<BsonDocument>.Filter.Eq("document_id", id);
+        var documentToUpdate = Builders<BsonDocument>.Filter.Eq("id", id);
 
         if (documentToUpdate is null) return null;
 
@@ -76,6 +76,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     public virtual async Task<DeleteResult> RemoveAsync(string id)
     {
         return await GetCollection(CollectionName)
-            .DeleteOneAsync(Builders<BsonDocument>.Filter.Eq("document_id", id));
+            .DeleteOneAsync(Builders<BsonDocument>.Filter.Eq("id", id));
     }
 }

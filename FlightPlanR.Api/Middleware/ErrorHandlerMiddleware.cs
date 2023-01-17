@@ -18,6 +18,12 @@ public class ErrorHandlerMiddleware
         {
             await _next.Invoke(context);
         }
+        catch (IdentityException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            await context.Response.WriteAsync(ex.Message);
+            Console.WriteLine(CreateMessage(ex));
+        }
         catch (NotFoundException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;

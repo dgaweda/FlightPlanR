@@ -9,7 +9,7 @@ public abstract class BaseEntity
     [BsonId]
     public ObjectId ObjectId { get; set; }
 
-    [BsonElement("document_id")] 
+    [BsonElement("id")] 
     public string? Id { get; set; }
 
     public void NewDocumentId()

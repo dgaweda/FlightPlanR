@@ -1,8 +1,7 @@
-using FlightPlanApi.Authentication;
+using FlightPlanApi.Common.Authentication;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
 using FlightPlanR.DataAccess;
-using Microsoft.AspNetCore.Authentication;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,8 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
-builder.Services.AddAuthentication("BasicAuthentication")
-    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+builder.Services.AddJwt(builder.Configuration);
 
 // Add custom services to the container.
 builder.Services.AddDataAccessDI(builder.Configuration);
@@ -43,7 +41,6 @@ app.UseCors(config =>
 
 app.UseMiddlewares();
 app.UseHttpsRedirection();
-app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
