@@ -1,8 +1,7 @@
-using FlightPlanApi.Common.Authentication;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
 using FlightPlanR.DataAccess;
-using FlightPlanR.Security;
+using Security;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,6 +1,6 @@
-﻿using FlightPlanApi.Models;
+﻿using FlightPlanR.DataAccess.Entity;
 
-namespace FlightPlanApi.Common.Authentication;
+namespace Security.Authentication;
 
 public interface IJwtHandler
 {

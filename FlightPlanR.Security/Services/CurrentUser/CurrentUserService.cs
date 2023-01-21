@@ -1,9 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using FlightPlanApi.Models;
+using FlightPlanR.DataAccess.Entity;
 using Microsoft.AspNetCore.Http;
 
-namespace FlightPlanR.Security.Services.CurrentUser;
+namespace Security.Services.CurrentUser;
 
 public class CurrentUserService : ICurrentUserService
 {

@@ -1,4 +1,4 @@
-﻿namespace FlightPlanR.DataAccess.Exceptions;
+﻿namespace FlightPlanApi.Common.Exceptions;
 
 public class NotFoundException : Exception
 {

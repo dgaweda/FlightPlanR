@@ -1,10 +1,10 @@
-﻿using FlightPlanApi.Common.Authentication;
-using FlightPlanR.Application.Services;
-using FlightPlanR.Security.Services.CurrentUser;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Security.Authentication;
+using Security.Services.Authenticate;
+using Security.Services.CurrentUser;
 
-namespace FlightPlanR.Security;
+namespace Security;
 
 public static class DependencyInjection
 {
@@ -13,7 +13,7 @@ public static class DependencyInjection
     services.AddJwt(configuration);
     services.AddHttpContextAccessor();
     services.AddSingleton<ICurrentUserService, CurrentUserService>();
-    services.AddScoped<IUserService, UserService>();
+    services.AddScoped<IAuthenticationService, AuthenticationService>();
     
     return services;
   }

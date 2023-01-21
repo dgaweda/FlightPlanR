@@ -1,8 +1,8 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace FlightPlanR.Application.Requests;
+namespace FlightPlanR.Application.Services.FlightPlan.Requests;
 
-public record InsertFlightPlanRequest
+public record AddFlightPlanRequest
 {
 	[BsonElement("id")] 
 	public string? Id { get; set; } = Guid.NewGuid().ToString("N");

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FlightPlanApi.Common.Authentication;
+namespace Security.Authentication;
 
 public static class JwtExtension
 {

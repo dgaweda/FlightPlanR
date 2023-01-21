@@ -1,6 +1,6 @@
-﻿using FlightPlanApi.Models;
-using FlightPlanR.DataAccess.Repository;
-using FlightPlanR.DataAccess.Repository.User;
+﻿using FlightPlanApi.Common.Configuration;
+using FlightPlanR.DataAccess.Repositories.FlightPlanRepository;
+using FlightPlanR.DataAccess.Repositories.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

@@ -1,5 +1,7 @@
-﻿using FlightPlanApi.Common.Authentication;
+﻿using FlightPlanApi.Controllers.Base;
 using FlightPlanR.Application.Services;
+using FlightPlanR.Application.Services.User;
+using FlightPlanR.Application.Services.User.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
@@ -12,19 +14,12 @@ public class UserController : BaseController
 	{
 		_userService = userService;
 	}
-	
-	[HttpPost("/authenticate")]
-	public async Task<IActionResult> Authenticate(AuthenticateRequest request)
-	{
-		var result = await _userService.Authenticate(request);
-		return Ok(result);
-	}
-	
+
 	[HttpPost]
 	public async Task<IActionResult> AddUser(AddUserRequest request)
 	{
-		var result = await _userService.AddUser(request);
-		return Ok(result);
+		await _userService.AddUser(request);
+		return Ok();
 	}
 	
 	[HttpGet("{id}")]

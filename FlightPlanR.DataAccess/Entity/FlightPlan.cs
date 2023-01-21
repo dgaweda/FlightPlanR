@@ -1,10 +1,7 @@
-﻿using System.Text.Json.Serialization;
-using FlightPlanApi.Common;
-using FlightPlanApi.Common.Enums;
-using MongoDB.Bson;
+﻿using FlightPlanR.DataAccess.Entity.Base;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace FlightPlanApi.Models;
+namespace FlightPlanR.DataAccess.Entity;
 
 public class FlightPlan : BaseEntity
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace FlightPlanApi.Controllers;
+namespace FlightPlanApi.Controllers.Base;
 
 [Route("api/v1/[controller]")]
 [ApiController]

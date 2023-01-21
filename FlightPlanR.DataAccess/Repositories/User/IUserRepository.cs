@@ -1,7 +1,7 @@
-﻿namespace FlightPlanR.DataAccess.Repository.User;
+﻿namespace FlightPlanR.DataAccess.Repositories.User;
 
-public interface IUserRepository : IRepository<FlightPlanApi.Models.User>
+public interface IUserRepository : IRepository<Entity.User>
 {
-	Task<FlightPlanApi.Models.User> FindByUsername(string username);
+	Task<Entity.User> FindByUsername(string username);
 	Task<bool> CheckIfUsernameIsTaken(string username);
 }

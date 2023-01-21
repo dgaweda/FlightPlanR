@@ -1,9 +1,8 @@
-﻿using FlightPlanR.DataAccess.Entity.Base;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace FlightPlanR.DataAccess.Entity;
+namespace FlightPlanR.Application.Services.User.Request;
 
-public class User : BaseEntity
+public record UpdateUserRequest
 {
 	[BsonElement("firstname")]
 	public string FirstName { get; set; }

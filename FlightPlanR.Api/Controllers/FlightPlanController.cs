@@ -1,8 +1,7 @@
-
-using FlightPlanApi.Models;
-using FlightPlanR.Application.Requests;
+using FlightPlanApi.Controllers.Base;
 using FlightPlanR.Application.Services;
-using FlightPlanR.DataAccess.Repository;
+using FlightPlanR.Application.Services.FlightPlan;
+using FlightPlanR.Application.Services.FlightPlan.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
@@ -30,14 +29,14 @@ public class FlightPlanController : BaseController
     }
     
     [HttpPost]
-    public async Task<IActionResult> Insert(InsertFlightPlanRequest flightPlanRequest)
+    public async Task<IActionResult> Insert(AddFlightPlanRequest flightPlanRequest)
     {
         await _flightPlanService.InsertOneAsync(flightPlanRequest);
         return Ok();
     }
     
     [HttpPut("{documentId}")]
-    public async Task<IActionResult> Update(string documentId, InsertFlightPlanRequest flightPlan)
+    public async Task<IActionResult> Update(string documentId, UpdateFlightPlanRequest flightPlan)
     {
         await _flightPlanService.UpdateAsync(documentId, flightPlan);
         return Ok();

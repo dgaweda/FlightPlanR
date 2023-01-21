@@ -1,8 +1,7 @@
-﻿using System.Text.Json.Serialization;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace FlightPlanApi.Models;
+namespace FlightPlanR.DataAccess.Entity.Base;
 
 public abstract class BaseEntity
 {
@@ -11,9 +10,4 @@ public abstract class BaseEntity
 
     [BsonElement("id")] 
     public string? Id { get; set; }
-
-    public void NewDocumentId()
-    {
-        Id = Guid.NewGuid().ToString("N");
-    }
 }

@@ -1,7 +1,7 @@
-﻿using FlightPlanR.DataAccess.Exceptions;
+﻿using FlightPlanApi.Common.Exceptions;
 using MongoDB.Driver;
 
-namespace FlightPlanR.Application.Extensions;
+namespace FlightPlanApi.Common.Extensions;
 
 public static class Extensions
 {

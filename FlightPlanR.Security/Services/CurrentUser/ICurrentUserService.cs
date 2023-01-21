@@ -1,6 +1,6 @@
-﻿using FlightPlanApi.Models;
+﻿using FlightPlanR.DataAccess.Entity;
 
-namespace FlightPlanR.Security.Services.CurrentUser;
+namespace Security.Services.CurrentUser;
 
 public interface ICurrentUserService
 {

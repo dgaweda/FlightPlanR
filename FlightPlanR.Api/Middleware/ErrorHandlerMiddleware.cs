@@ -1,5 +1,5 @@
 using System.Net;
-using FlightPlanR.DataAccess.Exceptions;
+using FlightPlanApi.Common.Exceptions;
 
 namespace FlightPlanApi.Middleware;
 

@@ -1,4 +1,4 @@
-﻿namespace FlightPlanApi.Common.Authentication;
+﻿namespace Security.Authentication;
 
 public class AuthenticateRequest
 {

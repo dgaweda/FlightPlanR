@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace FlightPlanR.DataAccess;
+﻿namespace FlightPlanApi.Common.Configuration;
 
 public class MongoConfiguration
 {

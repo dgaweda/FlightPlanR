@@ -1,4 +1,4 @@
-﻿namespace FlightPlanApi.Common.Enums;
+﻿namespace FlightPlanApi.Common.Attributes;
 
 
 public class EnumDescriptionAttribute : Attribute

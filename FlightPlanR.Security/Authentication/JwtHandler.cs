@@ -1,12 +1,12 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using FlightPlanApi.Models;
-using FlightPlanR.DataAccess.Exceptions;
+using FlightPlanApi.Common.Exceptions;
+using FlightPlanR.DataAccess.Entity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FlightPlanApi.Common.Authentication;
+namespace Security.Authentication;
 
 public class JwtHandler : IJwtHandler
 {

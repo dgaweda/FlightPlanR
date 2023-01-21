@@ -1,4 +1,6 @@
-﻿namespace FlightPlanApi.Middleware;
+﻿using Security.Middleware;
+
+namespace FlightPlanApi.Middleware;
 
 public static class MiddlewareExtension
 {

@@ -1,10 +1,8 @@
-﻿using FlightPlanApi.Models;
-using FlightPlanR.Application.Extensions;
-using FlightPlanR.Application.Requests;
-using FlightPlanR.DataAccess.Exceptions;
-using FlightPlanR.DataAccess.Repository;
+﻿using FlightPlanApi.Common.Extensions;
+using FlightPlanR.Application.Services.FlightPlan.Requests;
+using FlightPlanR.DataAccess.Repositories.FlightPlanRepository;
 
-namespace FlightPlanR.Application.Services;
+namespace FlightPlanR.Application.Services.FlightPlan;
 
 public class FlightPlanService : IFlightPlanService
 {
@@ -15,7 +13,7 @@ public class FlightPlanService : IFlightPlanService
         _flightPlanRepository = flightPlanRepository;
     }
 
-    public async Task<List<FlightPlan>> FindAllAsync()
+    public async Task<List<DataAccess.Entity.FlightPlan>> FindAllAsync()
     {
         var result = await _flightPlanRepository.FindAllAsync()
             .ThrowIfOperationFailed();
@@ -23,7 +21,7 @@ public class FlightPlanService : IFlightPlanService
         return result;
     }
 
-    public async Task<FlightPlan> FindByIdAsync(string flightPlanId)
+    public async Task<DataAccess.Entity.FlightPlan> FindByIdAsync(string flightPlanId)
     {
         var result = await _flightPlanRepository.FindByIdAsync(flightPlanId)
             .ThrowIfOperationFailed();
@@ -31,7 +29,7 @@ public class FlightPlanService : IFlightPlanService
         return result;
     }
 
-    public async Task InsertOneAsync(InsertFlightPlanRequest request)
+    public async Task InsertOneAsync(AddFlightPlanRequest request)
     {
         await _flightPlanRepository.InsertAsync(request)
             .ThrowIfOperationFailed();

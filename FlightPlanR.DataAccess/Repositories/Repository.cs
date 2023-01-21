@@ -1,12 +1,11 @@
-﻿using System.Reflection;
-using FlightPlanApi.Common;
-using FlightPlanApi.Models;
+﻿using FlightPlanApi.Common.Configuration;
+using FlightPlanR.DataAccess.Entity.Base;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
-namespace FlightPlanR.DataAccess.Repository;
+namespace FlightPlanR.DataAccess.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
 {
@@ -52,23 +51,22 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         return BsonSerializer.Deserialize<TEntity>(document);
     }
 
-    public virtual async Task<bool> InsertAsync(TEntity entity)
+    public virtual async Task<bool> InsertAsync<TRequest>(TRequest request)
     {
-        entity.NewDocumentId();
         var collection = GetCollection(CollectionName);
-        var document = entity.ToBsonDocument();
+        var document = request.ToBsonDocument();
         await collection.InsertOneAsync(document);
         return document["_id"].IsObjectId;
     }
 
-    public virtual async Task<UpdateResult> UpdateAsync(string id, TEntity entity)
+    public virtual async Task<UpdateResult> UpdateAsync<TRequest>(string id, TRequest request)
     {
         var collection = GetCollection(CollectionName);
         var documentToUpdate = Builders<BsonDocument>.Filter.Eq("id", id);
 
         if (documentToUpdate is null) return null;
 
-        return await collection.UpdateOneAsync(documentToUpdate, new BsonDocument { { "$set", entity.ToBsonDocument() } });
+        return await collection.UpdateOneAsync(documentToUpdate, new BsonDocument { { "$set", request.ToBsonDocument() } });
     }
 
     public virtual async Task<DeleteResult> RemoveAsync(string id)
