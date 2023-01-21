@@ -19,7 +19,8 @@ public class AuthenticationService : IAuthenticationService
 
 	public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
 	{
-		var user = await _userRepository.FindByUsername(request.Username);
+		var user = await _userRepository.FindByUsername(request.Username)
+			.ThrowIfOperationFailed();
 		if (user is null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
 			throw new IdentityException("Username or password is incorrect");
 

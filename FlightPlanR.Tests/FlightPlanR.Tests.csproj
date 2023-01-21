@@ -18,4 +18,11 @@
       <ProjectReference Include="..\FlightPlanR.DataAccess\FlightPlanR.DataAccess.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="API" />
+      <Folder Include="Application" />
+      <Folder Include="Common" />
+      <Folder Include="DataAccess" />
+    </ItemGroup>
+
 </Project>
