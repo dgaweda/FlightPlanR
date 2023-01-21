@@ -1,5 +1,6 @@
 ﻿using FlightPlanApi.Models;
 using FlightPlanR.Application.Extensions;
+using FlightPlanR.Application.Requests;
 using FlightPlanR.DataAccess.Exceptions;
 using FlightPlanR.DataAccess.Repository;
 
@@ -30,15 +31,15 @@ public class FlightPlanService : IFlightPlanService
         return result;
     }
 
-    public async Task InsertOneAsync(FlightPlan flightPlan)
+    public async Task InsertOneAsync(InsertFlightPlanRequest request)
     {
-        await _flightPlanRepository.InsertAsync(flightPlan)
+        await _flightPlanRepository.InsertAsync(request)
             .ThrowIfOperationFailed();
     }
 
-    public async Task UpdateAsync(string id, FlightPlan flightPlan)
+    public async Task UpdateAsync(string id, UpdateFlightPlanRequest request)
     {
-        await _flightPlanRepository.UpdateAsync(id, flightPlan)
+        await _flightPlanRepository.UpdateAsync(id, request)
             .ThrowIfOperationFailed();
     }
 
