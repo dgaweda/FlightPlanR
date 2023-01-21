@@ -1,5 +1,6 @@
 ﻿using FlightPlanApi.Common.Authentication;
-using FlightPlanR.Application.Services;
+using FlightPlanR.Security.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace FlightPlanApi.Middleware;
 
@@ -12,7 +13,7 @@ public class JwtMiddleware
 		_next = next;
 	}
 
-	public async Task InvokeAsync(HttpContext context, IUserService userService, IJwtHandler jwtHandler)
+	public async Task InvokeAsync(HttpContext context, IAuthenticationService authenticationService, IJwtHandler jwtHandler)
 	{
 		throw new NotImplementedException();
 	}

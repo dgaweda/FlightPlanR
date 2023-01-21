@@ -2,7 +2,7 @@
 
 public class IdentityException : Exception
 {
-	public IdentityException() : base("Invalid token.")
+	public IdentityException(string message) : base(message)
 	{
 		
 	}

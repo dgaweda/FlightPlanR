@@ -1,7 +1,9 @@
 ﻿using FlightPlanApi.Models;
 using FlightPlanR.DataAccess.Repository;
+using FlightPlanR.DataAccess.Repository.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization.Conventions;
 
 namespace FlightPlanR.DataAccess;
@@ -16,7 +18,9 @@ public static class DependencyInjection
             new IgnoreExtraElementsConvention(true)
         }, _ => true);
         services.Configure<MongoConfiguration>(configuration.GetSection("Database:MongoDB").Bind);
-        services.AddScoped<IFlightPlanRepository, FlightPlanRepository>();
+        
+        services.AddScoped<IFlightPlanRepository>(sp => new FlightPlanRepository(sp.GetRequiredService<IOptions<MongoConfiguration>>(),"flight_plans"));
+        services.AddScoped<IUserRepository>(sp => new UserRepository(sp.GetRequiredService<IOptions<MongoConfiguration>>(),"user"));
         return services;
     }
 }

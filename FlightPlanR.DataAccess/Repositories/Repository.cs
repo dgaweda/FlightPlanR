@@ -4,9 +4,7 @@ using FlightPlanApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
-using Newtonsoft.Json.Linq;
 
 namespace FlightPlanR.DataAccess.Repository;
 
@@ -33,21 +31,21 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         var documents = await GetCollection(CollectionName)
             .Find(_ => true).ToListAsync();
 
-        var flightPlans = new List<TEntity>();
+        var entities = new List<TEntity>();
         
-        if (documents is null) return flightPlans;
+        if (documents is null) return entities;
         
-        flightPlans.AddRange(documents.Select(bsonDocument => BsonSerializer.Deserialize<TEntity>(bsonDocument)));
+        entities.AddRange(documents.Select(bsonDocument => BsonSerializer.Deserialize<TEntity>(bsonDocument)));
 
-        return flightPlans;
+        return entities;
     }
 
     public virtual async Task<TEntity?> FindByIdAsync(string id)
     {
         var collection = GetCollection(CollectionName);
-        var flightPlanCursor = await collection
+        var documentCursor = await collection
             .FindAsync(Builders<BsonDocument>.Filter.Eq("id", id));
-        var document = await flightPlanCursor.FirstOrDefaultAsync();
+        var document = await documentCursor.FirstOrDefaultAsync();
         
         if (document is null) return null;
 

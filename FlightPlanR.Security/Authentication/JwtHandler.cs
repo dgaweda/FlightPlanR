@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FlightPlanApi.Models;
 using FlightPlanR.DataAccess.Exceptions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -15,7 +16,7 @@ public class JwtHandler : IJwtHandler
 		_jwtOptions = jwtOptions.Value;
 	}
 	
-	public Task<string> GenerateToken(string userId)
+	public Task<string> GenerateToken(User user)
 	{
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
@@ -23,7 +24,10 @@ public class JwtHandler : IJwtHandler
 		{
 			Subject = new ClaimsIdentity(new[]
 			{
-				new Claim(JwtRegisteredClaimNames.UniqueName, userId)
+				new Claim(JwtRegisteredClaimNames.Jti, user.Id),
+				new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+				new Claim("firstname", user.FirstName),
+				new Claim("lastname", user.LastName)
 			}),
 			Expires = DateTime.UtcNow.AddHours(1),
 			SigningCredentials =
@@ -36,7 +40,7 @@ public class JwtHandler : IJwtHandler
 	public Task<string> ValidateToken(string token)
 	{
 		if (token is null)
-			throw new IdentityException();
+			throw new IdentityException("Token is null.");
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
@@ -51,12 +55,12 @@ public class JwtHandler : IJwtHandler
 			}, out var validatedToken);
 
 			var jwtToken = (JwtSecurityToken)validatedToken;
-			var userId = jwtToken.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.UniqueName).Value;
+			var userId = jwtToken.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value;
 			return Task.FromResult(userId);
 		}
 		catch
 		{
-			throw new IdentityException();
+			throw new IdentityException("Token validation failed.");
 		}
 	}
 }

@@ -2,6 +2,7 @@ using FlightPlanApi.Common.Authentication;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
 using FlightPlanR.DataAccess;
+using FlightPlanR.Security;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +17,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
-builder.Services.AddJwt(builder.Configuration);
 
 // Add custom services to the container.
+builder.Services.AddSecurityDI(builder.Configuration);
 builder.Services.AddDataAccessDI(builder.Configuration);
 builder.Services.AddApplicationDI();
 

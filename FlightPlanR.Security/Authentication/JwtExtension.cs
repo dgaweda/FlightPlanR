@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FlightPlanApi.Common.Authentication;
 
@@ -13,6 +15,7 @@ public static class JwtExtension
 			options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 			options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 		}).AddJwtBearer();
+		
 		services.Configure<JwtOptions>(configuration.GetSection(JwtSection));
 		services.AddScoped<IJwtHandler, JwtHandler>();
 		return services;
