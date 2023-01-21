@@ -1,18 +1,9 @@
-﻿
-
-using FlightPlanApi.Common.Authentication;
+﻿using FlightPlanApi.Common.Authentication;
+using FlightPlanApi.Models;
 
 namespace FlightPlanR.Security.Services;
 
-public class AuthenticationService : IAuthenticationService
+public interface IAuthenticationService
 {
-	public async Task<string> Authenticate(AuthenticateRequest request)
-	{
-		throw new NotImplementedException();
-	}
-
-	public async Task LogOut()
-	{
-		throw new NotImplementedException();
-	}
+	Task<AuthenticateResponse> Authenticate(AuthenticateRequest request);
 }

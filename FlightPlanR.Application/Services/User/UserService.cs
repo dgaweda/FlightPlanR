@@ -1,26 +1,44 @@
 ﻿using FlightPlanApi.Models;
+using FlightPlanR.Application.Extensions;
+using FlightPlanR.DataAccess.Exceptions;
+using FlightPlanR.DataAccess.Repository.User;
 
 namespace FlightPlanR.Application.Services;
 
 public class UserService : IUserService
 {
-	public async Task<User> GetUser(string userId)
+	private readonly IUserRepository _userRepository;
+
+	public UserService(IUserRepository userRepository)
 	{
-		throw new NotImplementedException();
+		_userRepository = userRepository;
 	}
 
-	public async Task AddUser(User user)
+	public async Task<User> GetUser(string userId)
 	{
-		throw new NotImplementedException();
+		var user = await _userRepository.FindByIdAsync(userId).ThrowIfOperationFailed();
+		return user;
 	}
 
 	public async Task RemoveUser(string userId)
 	{
-		throw new NotImplementedException();
+		await _userRepository.RemoveAsync(userId).ThrowIfOperationFailed();
 	}
 
 	public async Task EditUser(string userId, User user)
 	{
-		throw new NotImplementedException();
+
+		await _userRepository.UpdateAsync(userId, user).ThrowIfOperationFailed();
+	}
+	
+	public async Task AddUser(User userData)
+	{
+		var user = await _userRepository.FindByUsername(userData.Username);
+		if (user is not null)
+			throw new IdentityException("User already exists.");
+
+		userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
+		
+		await _userRepository.InsertAsync(userData).ThrowIfOperationFailed();
 	}
 }

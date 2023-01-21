@@ -1,4 +1,5 @@
 ﻿using FlightPlanApi.Models;
+using FlightPlanR.Application.Extensions;
 using FlightPlanR.DataAccess.Exceptions;
 using FlightPlanR.DataAccess.Repository;
 
@@ -15,48 +16,35 @@ public class FlightPlanService : IFlightPlanService
 
     public async Task<List<FlightPlan>> FindAllAsync()
     {
-        var result = await _flightPlanRepository.FindAllAsync();
-        if (!result.Any())
-            throw new NoContentException("No elements.");
+        var result = await _flightPlanRepository.FindAllAsync()
+            .ThrowIfOperationFailed();
         
         return result;
     }
 
     public async Task<FlightPlan> FindByIdAsync(string flightPlanId)
     {
-        var result = await _flightPlanRepository.FindByIdAsync(flightPlanId);
-        if (result is null)
-        {
-            throw new NotFoundException($"Document with ID: {flightPlanId} not found.");
-        }
+        var result = await _flightPlanRepository.FindByIdAsync(flightPlanId)
+            .ThrowIfOperationFailed();
         
         return result;
     }
 
     public async Task InsertOneAsync(FlightPlan flightPlan)
     {
-        var result = await _flightPlanRepository.InsertAsync(flightPlan);
-        if (!result)
-        {
-            throw new BadRequestException("Inserting element failed.");
-        }
+        await _flightPlanRepository.InsertAsync(flightPlan)
+            .ThrowIfOperationFailed();
     }
 
     public async Task UpdateAsync(string id, FlightPlan flightPlan)
     {
-        var result = await _flightPlanRepository.UpdateAsync(id, flightPlan);
-        if (result is null && result?.MatchedCount == 0 || result?.ModifiedCount == 0)
-        {
-            throw new NotUpdatedException("No updates or element not found.");
-        }
+        await _flightPlanRepository.UpdateAsync(id, flightPlan)
+            .ThrowIfOperationFailed();
     }
 
     public async Task RemoveAsync(string flightPlanId)
     {
-        var result = await _flightPlanRepository.RemoveAsync(flightPlanId);
-        if (result.DeletedCount == 0)
-        {
-            throw new NotFoundException($"Removing failed. Flight plan with id {flightPlanId} not found.");
-        }
+        await _flightPlanRepository.RemoveAsync(flightPlanId)
+            .ThrowIfOperationFailed();
     }
 }
