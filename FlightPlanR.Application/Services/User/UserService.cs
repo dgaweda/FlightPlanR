@@ -41,7 +41,7 @@ public class UserService : IUserService
 	{
 		var user = await _userRepository.FindByUsername(userData.Username);
 		if (user is not null)
-			throw new IdentityException("User already exists.");
+			throw new BadRequestException("User already exists.");
 
 		userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
 		

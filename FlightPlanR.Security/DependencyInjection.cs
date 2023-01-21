@@ -14,6 +14,7 @@ public static class DependencyInjection
     services.AddHttpContextAccessor();
     services.AddSingleton<ICurrentUserService, CurrentUserService>();
     services.AddScoped<IAuthenticationService, AuthenticationService>();
+    services.AddScoped<IJwtHandler, JwtHandler>();
     
     return services;
   }

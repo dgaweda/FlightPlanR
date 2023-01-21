@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text.Json;
 using FlightPlanApi.Common.Exceptions;
 
 namespace FlightPlanApi.Middleware;
@@ -18,45 +19,48 @@ public class ErrorHandlerMiddleware
         {
             await _next.Invoke(context);
         }
-        catch (IdentityException ex)
+        catch (Exception error)
         {
-            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            await context.Response.WriteAsync(ex.Message);
-            Console.WriteLine(CreateMessage(ex));
-        }
-        catch (NotFoundException ex)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            await context.Response.WriteAsync(ex.Message);
-            Console.WriteLine(CreateMessage(ex));
-        }
-        catch (NotUpdatedException ex)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.NotModified;
-            await context.Response.WriteAsync(ex.Message);
-            Console.WriteLine(CreateMessage(ex));
-            await _next.Invoke(context);
-        }
-        catch (NoContentException ex)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.NoContent;
-            await context.Response.WriteAsync(ex.Message);
-            Console.WriteLine(CreateMessage(ex));
-            await _next.Invoke(context);
-        }
-        catch (BadRequestException ex)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            await context.Response.WriteAsync(ex.Message);
-            Console.WriteLine(CreateMessage(ex));
-        }
-        catch (Exception ex)
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            await context.Response.WriteAsync("Internal server error.");
-            Console.WriteLine(CreateMessage(ex));
+            var response = context.Response;
+            response.ContentType = "application/json";
+            
+            switch (error)
+            {
+                case IdentityException:
+                    response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    break;
+                case NotFoundException:
+                    response.StatusCode = (int)HttpStatusCode.NotFound;
+                    break;
+                case BadRequestException:
+                    response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    break;
+                case NotUpdatedException ex:
+                    response.StatusCode = (int)HttpStatusCode.NotModified;
+                    await response.WriteAsync(SerializeMessage(ex));
+                    Console.WriteLine(CreateMessage(ex));
+                    await _next.Invoke(context);
+                    break;
+                case NoContentException ex:
+                    response.StatusCode = (int)HttpStatusCode.NotModified;
+                    await response.WriteAsync(SerializeMessage(ex));
+                    Console.WriteLine(CreateMessage(ex));
+                    await _next.Invoke(context);
+                    break;
+                default:
+                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    break;
+            }
+            
+            await response.WriteAsync(SerializeMessage(error));
+            Console.WriteLine(CreateMessage(error));
         }
     }
 
-    private string CreateMessage(Exception ex) => $"{ex.Message}\n\n{ex.Source}\n\n{ex.StackTrace}";
+    private string CreateMessage(Exception ex) => $"{ex.Message}\n\n{ex.Source}\n{ex.StackTrace}";
+
+    private string SerializeMessage(Exception ex)
+    {
+        return JsonSerializer.Serialize(new { message = ex.Message });
+    }
 }

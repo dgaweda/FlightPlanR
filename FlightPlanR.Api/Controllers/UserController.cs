@@ -2,6 +2,7 @@
 using FlightPlanR.Application.Services;
 using FlightPlanR.Application.Services.User;
 using FlightPlanR.Application.Services.User.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
@@ -15,7 +16,8 @@ public class UserController : BaseController
 		_userService = userService;
 	}
 
-	[HttpPost]
+	[HttpPost("register")]
+	[AllowAnonymous]
 	public async Task<IActionResult> AddUser(AddUserRequest request)
 	{
 		await _userService.AddUser(request);

@@ -40,7 +40,7 @@ public class JwtHandler : IJwtHandler
 	public Task<string> ValidateToken(string token)
 	{
 		if (token is null)
-			throw new IdentityException("Token is null.");
+			throw new IdentityException();
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);

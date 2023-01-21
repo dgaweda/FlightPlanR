@@ -1,4 +1,5 @@
 ﻿using FlightPlanApi.Controllers.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Security.Authentication;
 using Security.Services.Authenticate;
@@ -14,7 +15,8 @@ public class AuthenticateController : BaseController
 		_authenticateService = authenticateService;
 	}
 
-	[HttpPost("/authenticate")]
+	[HttpPost("authenticate")]
+	[AllowAnonymous]
 	public async Task<IActionResult> Authenticate(AuthenticateRequest request)
 	{
 		var result = await _authenticateService.Authenticate(request);

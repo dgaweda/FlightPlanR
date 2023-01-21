@@ -4,7 +4,7 @@ namespace FlightPlanApi.Middleware;
 
 public static class MiddlewareExtension
 {
-	public static IApplicationBuilder UseMiddlewares(this IApplicationBuilder builder)
+	public static IApplicationBuilder UseCustomeMiddlewares(this IApplicationBuilder builder)
 	{
 		builder.UseMiddleware<ErrorHandlerMiddleware>();
 		builder.UseMiddleware<JwtMiddleware>();

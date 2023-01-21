@@ -1,6 +1,8 @@
+using System.Reflection;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
 using FlightPlanR.DataAccess;
+using Microsoft.OpenApi.Models;
 using Security;
 using Serilog;
 
@@ -14,7 +16,43 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 // Add Basic services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("flightplanr", new OpenApiInfo
+    {
+        Title = "Flight Plan API",
+        Version = "v3",
+        Description = "FlightPlanR Web API with NO-SQL DB"
+    });
+    
+    options.AddSecurityDefinition("jwt", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        In = ParameterLocation.Header,
+        Description = "Json Web Token Bearer Authorization"
+    });
+    
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "jwt"
+                }
+            },
+            new string[] { }
+        }
+        
+    });
+    options.EnableAnnotations();
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
 builder.Services.AddCors();
 
 // Add custom services to the container.
@@ -28,7 +66,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/flightplanr/swagger.json", "FlightPlanR"));
 }
 
 app.UseCors(config =>
@@ -39,7 +77,7 @@ app.UseCors(config =>
         .AllowAnyHeader();
 });
 
-app.UseMiddlewares();
+app.UseCustomeMiddlewares();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
