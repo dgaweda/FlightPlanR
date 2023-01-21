@@ -10,7 +10,7 @@ namespace FlightPlanR.DataAccess;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDataAccessDI(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDataAccessServices(this IServiceCollection services, IConfiguration configuration)
     {
         ConventionRegistry.Register("Ignore", new ConventionPack
         {

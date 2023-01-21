@@ -19,9 +19,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 // Add custom services to the container.
-builder.Services.AddSecurityDI(builder.Configuration);
-builder.Services.AddDataAccessDI(builder.Configuration);
-builder.Services.AddApplicationDI();
+builder.Services.AddSecurityServices(builder.Configuration);
+builder.Services.AddDataAccessServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
