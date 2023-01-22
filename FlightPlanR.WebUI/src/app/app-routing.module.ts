@@ -8,17 +8,17 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    title: 'Home'
+    title: 'FlightPlanR - Home'
   },
   {
     path: 'flight-plans',
     component: FlightPlansComponent,
-    title: 'Flight Plans'
+    title: 'FlightPlanR - Flight Plans'
   },
   {
     path: 'administration',
     component: AdministrationComponent,
-    title: 'Administration'
+    title: 'FlightPlanR - Administration'
   },
   {
     path: '**',
