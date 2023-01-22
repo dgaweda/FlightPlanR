@@ -46,7 +46,7 @@ public class UserController : BaseController
 	}
 	
 	[HttpDelete("{id}")] 
-	public async Task<IActionResult> UpdateUser(string id)
+	public async Task<IActionResult> RemoveUser(string id)
 	{ 
 		await _userService.RemoveUser(id);
 		return Ok();

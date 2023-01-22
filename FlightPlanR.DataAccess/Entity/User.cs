@@ -13,4 +13,6 @@ public class User : BaseEntity
 	public string Username { get; set; }
 	[BsonElement("password")]
 	public string Password { get; set; }
+	[BsonElement("is_admin")]
+	public bool IsAdmin { get; set; }
 }

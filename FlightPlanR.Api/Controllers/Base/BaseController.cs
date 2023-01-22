@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers.Base;
 
-[Route("api/v1/[controller]/")]
+[Route("api/[controller]/")]
 [ApiController]
 [Authorize]
 public class BaseController : ControllerBase
