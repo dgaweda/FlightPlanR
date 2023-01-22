@@ -43,7 +43,7 @@ export class BaseApiService {
     requestOptions.body = body;
     requestOptions.params = params;
 
-    return this.http.request<HttpResponse<T>>(method, `${this.apiRoutes.baseUrl}/api/${endpoint}`, requestOptions).pipe(
+    return this.http.request<HttpResponse<T>>(method, `${this.apiRoutes.baseUrl}/${endpoint}`, requestOptions).pipe(
       map((response: HttpResponse<T>) => response.body as T)
     );
   }
