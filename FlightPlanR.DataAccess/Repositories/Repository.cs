@@ -56,6 +56,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         var collection = GetCollection(CollectionName);
         var document = request.ToBsonDocument();
         await collection.InsertOneAsync(document);
+        var result = await collection.FindAsync(Builders<BsonDocument>.Filter.AnyEq("_id", document["_id"]));
+        return result.FirstOrDefault() is not null;
     }
 
     public virtual async Task<UpdateResult> UpdateAsync<TRequest>(string id, TRequest request)

@@ -24,7 +24,7 @@ public class JwtHandler : IJwtHandler
 		{
 			Subject = new ClaimsIdentity(new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Jti, user.Id),
+				new Claim(JwtRegisteredClaimNames.Jti, user.DocumentId),
 				new Claim(JwtRegisteredClaimNames.Sub, user.Username),
 				new Claim("firstname", user.FirstName),
 				new Claim("lastname", user.LastName)

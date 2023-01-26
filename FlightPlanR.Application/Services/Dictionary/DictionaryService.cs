@@ -38,7 +38,7 @@ public class DictionaryService : IDictionaryService
 	{
 		var result = await _dictionaryRepository.FindAllAsync().ThrowIfOperationFailed();
 
-		return result.GroupBy(x => x.Discriminator)
+		return result.GroupBy(x => x.CountryFormat)
 			.Select(x => new DictionaryDto(
 				x.Key,
 				x.Select(data => new CountryDto(data.CountryId, data.Value)).ToList())

@@ -7,15 +7,7 @@ namespace FlightPlanR.DataAccess.Entity.Dictionary.Countries;
 [BsonDiscriminator(RootClass = true)]
 public class BaseCountry : BaseEntity
 {
-	[BsonElement("country_id")] 
-	public int CountryId { get; set; }
-	
 	[BsonElement("country_format")]
-	public string Discriminator { get; set; }
-
-	[BsonElement("country")]
-	public string Country { get; set; }
+	public string CountryFormat { get; set; }
 	
-	[BsonElement("value")]
-	public string Value { get; set; }
 }

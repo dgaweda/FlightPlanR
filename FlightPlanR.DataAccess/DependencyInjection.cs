@@ -16,8 +16,7 @@ public static class DependencyInjection
     {
         ConventionRegistry.Register("Ignore", new ConventionPack
         {
-            new IgnoreIfDefaultConvention(true),
-            new IgnoreExtraElementsConvention(true)
+            new IgnoreIfDefaultConvention(true)
         }, _ => true);
         services.Configure<MongoConfiguration>(configuration.GetSection("Database:MongoDB").Bind);
         services.AddSingleton<MongoConfiguration>();

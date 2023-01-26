@@ -27,7 +27,7 @@ public class AuthenticationService : IAuthenticationService
 		return new AuthenticateResponse()
 		{
 			FirstName = user.FirstName,
-			Id = user.Id,
+			Id = user.DocumentId,
 			LastName = user.LastName,
 			Token = await _jwtHandler.GenerateToken(user),
 			Username = user.Username
