@@ -8,11 +8,10 @@ namespace FlightPlanR.DataAccess.Repositories.User;
 
 public class UserRepository : Repository<Entity.User>, IUserRepository
 {
-	private readonly string _collectionName;
-	public UserRepository(IOptions<MongoConfiguration> configuration, string collectionName) 
-		: base(configuration, collectionName)
+	private static readonly string _collectionName = "users";
+	public UserRepository(IOptions<MongoConfiguration> configuration) 
+		: base(configuration, _collectionName)
 	{
-		_collectionName = collectionName;
 	}
 
 	public async Task<Entity.User> FindByUsername(string username)

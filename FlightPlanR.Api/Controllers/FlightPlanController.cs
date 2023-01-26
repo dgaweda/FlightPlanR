@@ -1,10 +1,10 @@
 using FlightPlanApi.Controllers.Base;
-using FlightPlanR.Application.Services;
 using FlightPlanR.Application.Services.FlightPlan;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
+
 public class FlightPlanController : BaseController
 {
     private readonly IFlightPlanService _flightPlanService;

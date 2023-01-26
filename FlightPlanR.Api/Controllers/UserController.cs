@@ -1,5 +1,4 @@
 ﻿using FlightPlanApi.Controllers.Base;
-using FlightPlanR.Application.Services;
 using FlightPlanR.Application.Services.User;
 using FlightPlanR.Application.Services.User.Request;
 using Microsoft.AspNetCore.Authorization;

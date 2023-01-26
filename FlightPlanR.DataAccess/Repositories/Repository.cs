@@ -7,13 +7,13 @@ using MongoDB.Driver;
 
 namespace FlightPlanR.DataAccess.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
 {
     private string CollectionName { get; }
 
     private readonly MongoConfiguration _configuration;
 
-    protected Repository(IOptions<MongoConfiguration> configuration, string collectionName)
+    public Repository(IOptions<MongoConfiguration> configuration, string collectionName)
     {
         _configuration = configuration.Value;
         CollectionName = collectionName;
@@ -56,7 +56,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         var collection = GetCollection(CollectionName);
         var document = request.ToBsonDocument();
         await collection.InsertOneAsync(document);
-        return document["_id"].IsObjectId;
     }
 
     public virtual async Task<UpdateResult> UpdateAsync<TRequest>(string id, TRequest request)

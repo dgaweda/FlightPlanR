@@ -6,8 +6,9 @@ namespace FlightPlanR.DataAccess.Repositories.FlightPlanRepository;
 
 public class FlightPlanRepository : Repository<FlightPlan>, IFlightPlanRepository
 {
-    public FlightPlanRepository(IOptions<MongoConfiguration> mongoConfiguration, string collectionName) 
-        : base(mongoConfiguration, collectionName)
+    private static readonly string _collectionName = "flight_plans";
+    public FlightPlanRepository(IOptions<MongoConfiguration> mongoConfiguration) 
+        : base(mongoConfiguration, _collectionName)
     {
     }
 }

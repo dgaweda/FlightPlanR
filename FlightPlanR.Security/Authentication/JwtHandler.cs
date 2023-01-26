@@ -37,10 +37,10 @@ public class JwtHandler : IJwtHandler
 		return Task.FromResult(tokenHandler.WriteToken(token));
 	}
 
-	public Task<string> ValidateToken(string token)
+	public Task<string?> ValidateToken(string token)
 	{
 		if (token is null)
-			throw new IdentityException();
+			return Task.FromResult<string>(null);
 
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
@@ -60,7 +60,7 @@ public class JwtHandler : IJwtHandler
 		}
 		catch
 		{
-			throw new IdentityException("Token validation failed.");
+			return null;
 		}
 	}
 }
