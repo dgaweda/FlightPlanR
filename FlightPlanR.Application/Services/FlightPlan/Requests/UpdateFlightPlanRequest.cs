@@ -2,7 +2,7 @@
 
 namespace FlightPlanR.Application.Services.FlightPlan.Requests;
 
-public record UpdateFlightPlanRequest
+public class UpdateFlightPlanRequest
 {
 	[BsonElement("aircraft_identification")]
 	public string? AircraftIdentification { get; set; }

@@ -1,78 +1,62 @@
 ﻿using System.Reflection;
 using FlightPlanApi.Common.Attributes;
 using FlightPlanApi.Common.Configuration;
-using FlightPlanR.DataAccess.Entity.Base;
+using FlightPlanApi.Common.Extensions;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace FlightPlanR.DataAccess.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity.Base.Entity
 {
-    private readonly MongoConfiguration _configuration;
-    private readonly string _collection;
+    private readonly IMongoDatabase _database;
+    protected readonly IMongoCollection<TEntity> Collection;
 
-    public Repository(IOptions<MongoConfiguration> configuration)
+    public Repository(MongoConfiguration configuration, IMongoClient mongoClient)
     {
-        _configuration = configuration.Value;
-        _collection = typeof(TEntity).GetType().GetCustomAttribute<MongoCollectionAttribute>()?.CollectionName;
+        _database = mongoClient.GetDatabase(configuration.Name);
+        Collection = GetCollection();
     }
-    protected IMongoCollection<BsonDocument> GetCollection()
-    {
-        var client = new MongoClient();
-        var database = client.GetDatabase(_configuration.Name);
-        return database.GetCollection<BsonDocument>(_collection);
-    }
+    
+    protected IMongoCollection<TEntity> GetCollection() =>
+        _database.GetCollection<TEntity>(GetCollectionName());
+
+    private string GetCollectionName() => typeof(TEntity).GetAttributeFromClass<MongoCollectionAttribute>().CollectionName;
 
     public virtual async Task<List<TEntity>> FindAllAsync()
     {
-        var documents = await GetCollection()
-            .Find(_ => true).ToListAsync();
-
-        var entities = new List<TEntity>();
-        
-        if (documents is null) return entities;
-        
-        entities.AddRange(documents.Select(bsonDocument => BsonSerializer.Deserialize<TEntity>(bsonDocument)));
-
-        return entities;
+        var entities = await GetCollection().Find(_ => true).ToListAsync();
+        return entities ?? new List<TEntity>();
     }
 
     public virtual async Task<TEntity?> FindByIdAsync(string id)
     {
-        var collection = GetCollection();
-        var documentCursor = await collection
-            .FindAsync(Builders<BsonDocument>.Filter.Eq("document_id", id));
-        var document = await documentCursor.FirstOrDefaultAsync();
-        
-        if (document is null) return null;
+        var documentCursor = await Collection.FindAsync(x => x.DocumentId == id);
+        var entity = await documentCursor.FirstOrDefaultAsync();
 
-        return BsonSerializer.Deserialize<TEntity>(document);
+        return entity;
     }
 
-    public virtual async Task<bool> InsertAsync<TRequest>(TRequest request)
+    public virtual async Task<bool> InsertAsync(TEntity entity)
     {
-        var collection = GetCollection();
-        var document = request.ToBsonDocument();
-        await collection.InsertOneAsync(document);
-        var result = await collection.FindAsync(Builders<BsonDocument>.Filter.AnyEq("_id", document["_id"]));
+        await Collection.InsertOneAsync(entity);
+        var result = await Collection.FindAsync(x => x.DocumentId == entity.DocumentId);
         return result.FirstOrDefault() is not null;
     }
 
-    public virtual async Task<UpdateResult> UpdateAsync<TRequest>(string id, TRequest request)
+    public virtual async Task<UpdateResult> UpdateAsync(string id, TEntity entity)
     {
-        var collection = GetCollection();
+        var collection = _database.GetCollection<BsonDocument>(GetCollectionName());
         var documentToUpdate = Builders<BsonDocument>.Filter.Eq("document_id", id);
 
         if (documentToUpdate is null) return null;
 
-        return await collection.UpdateOneAsync(documentToUpdate, new BsonDocument { { "$set", request.ToBsonDocument() } });
+        return await collection.UpdateOneAsync(documentToUpdate, new BsonDocument { { "$set", entity.ToBsonDocument() } });
     }
 
     public virtual async Task<DeleteResult> RemoveAsync(string id)
     {
-        return await GetCollection().DeleteOneAsync(Builders<BsonDocument>.Filter.Eq("document_id", id));
+        return await Collection.DeleteOneAsync(x => x.DocumentId == id);
     }
 }

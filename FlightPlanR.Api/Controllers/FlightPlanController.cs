@@ -1,6 +1,7 @@
 using FlightPlanApi.Controllers.Base;
 using FlightPlanR.Application.Services.FlightPlan;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
@@ -15,6 +16,7 @@ public class FlightPlanController : BaseController
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> FindAll()
     {
         var result = await _flightPlanService.FindAllAsync();

@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace FlightPlanApi.Common.Extensions;
 
-public static class Extensions
+public static class MongoOperationsExceptionExtensions
 {
 	public static async Task<List<TEntity>> ThrowIfOperationFailed<TEntity>(this Task<List<TEntity>> results)
 	{

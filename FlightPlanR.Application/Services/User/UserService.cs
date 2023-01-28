@@ -1,4 +1,5 @@
-﻿using FlightPlanApi.Common.Exceptions;
+﻿using AutoMapper;
+using FlightPlanApi.Common.Exceptions;
 using FlightPlanApi.Common.Extensions;
 using FlightPlanR.Application.Services.User.Request;
 using FlightPlanR.DataAccess.Repositories.User;
@@ -8,10 +9,12 @@ namespace FlightPlanR.Application.Services.User;
 public class UserService : IUserService
 {
 	private readonly IUserRepository _userRepository;
+	private readonly IMapper _mapper;
 
-	public UserService(IUserRepository userRepository)
+	public UserService(IUserRepository userRepository, IMapper mapper)
 	{
 		_userRepository = userRepository;
+		_mapper = mapper;
 	}
 	
 	public async Task<DataAccess.Entity.User> GetUserByUsername(string username)
@@ -33,8 +36,8 @@ public class UserService : IUserService
 
 	public async Task EditUser(string userId, UpdateUserRequest user)
 	{
-
-		await _userRepository.UpdateAsync(userId, user).ThrowIfOperationFailed();
+		var result = _mapper.Map<DataAccess.Entity.User>(user);
+		await _userRepository.UpdateAsync(userId, result).ThrowIfOperationFailed();
 	}
 	
 	public async Task AddUser(AddUserRequest userData)
@@ -44,7 +47,7 @@ public class UserService : IUserService
 			throw new BadRequestException("User already exists.");
 
 		userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
-		
-		await _userRepository.InsertAsync(userData).ThrowIfOperationFailed();
+		var result = _mapper.Map<DataAccess.Entity.User>(userData);
+		await _userRepository.InsertAsync(result).ThrowIfOperationFailed();
 	}
 }

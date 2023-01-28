@@ -2,10 +2,9 @@
 
 namespace FlightPlanR.Application.Services.User.Request;
 
-public record AddUserRequest
+public class AddUserRequest : FlightPlanApi.Common.Request
 {
-	[BsonElement("id")] 
-	public string Id { get; set; } = Guid.NewGuid().ToString("N");
+
 	[BsonElement("firstname")]
 	public string FirstName { get; set; }
 	[BsonElement("lastname")]

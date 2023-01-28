@@ -1,26 +1,20 @@
 ﻿using FlightPlanApi.Common.Configuration;
-using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace FlightPlanR.DataAccess.Repositories.User;
 
 public class UserRepository : Repository<Entity.User>, IUserRepository
 {
-	public UserRepository(IOptions<MongoConfiguration> configuration) 
-		: base(configuration)
+	public UserRepository(MongoConfiguration configuration, IMongoClient mongoClient) 
+		: base(configuration, mongoClient)
 	{
 	}
 
 	public async Task<Entity.User> FindByUsername(string username)
 	{
-		var documentCursor = await GetCollection().FindAsync(Builders<BsonDocument>.Filter.Eq("username", username));
-		var document = await documentCursor.FirstOrDefaultAsync();
-		if (document is null) return null;
-
-		var user = BsonSerializer.Deserialize<Entity.User>(document);
-		return user;
+		var collectionCursor = await Collection.FindAsync(x => x.Username == username);
+		var user = await collectionCursor.FirstOrDefaultAsync();
+		return user ?? null;
 	}
 
 	public async Task<bool> CheckIfUsernameIsTaken(string username)
