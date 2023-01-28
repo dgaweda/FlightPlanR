@@ -8,16 +8,14 @@ namespace FlightPlanR.DataAccess.Repositories.User;
 
 public class UserRepository : Repository<Entity.User>, IUserRepository
 {
-	private static readonly string _collectionName = "users";
 	public UserRepository(IOptions<MongoConfiguration> configuration) 
-		: base(configuration, _collectionName)
+		: base(configuration)
 	{
 	}
 
 	public async Task<Entity.User> FindByUsername(string username)
 	{
-		var documentCursor = await GetCollection(_collectionName)
-			.FindAsync(Builders<BsonDocument>.Filter.Eq("username", username));
+		var documentCursor = await GetCollection().FindAsync(Builders<BsonDocument>.Filter.Eq("username", username));
 		var document = await documentCursor.FirstOrDefaultAsync();
 		if (document is null) return null;
 

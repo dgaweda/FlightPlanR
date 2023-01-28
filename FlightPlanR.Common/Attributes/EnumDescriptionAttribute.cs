@@ -1,12 +1,12 @@
 ﻿namespace FlightPlanApi.Common.Attributes;
 
-
-public class EnumDescriptionAttribute : Attribute
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+public class MongoCollectionAttribute : Attribute
 {
-    public string Description { get; set; }
+    public string CollectionName { get; set; }
 
-    public EnumDescriptionAttribute(string description)
+    public MongoCollectionAttribute(string collectionName)
     {
-        Description = description;
+        CollectionName = collectionName;
     }
 }

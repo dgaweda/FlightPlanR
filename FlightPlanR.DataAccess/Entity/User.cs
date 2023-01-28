@@ -1,9 +1,10 @@
-﻿using FlightPlanR.DataAccess.Entity.Base;
+﻿using FlightPlanApi.Common.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace FlightPlanR.DataAccess.Entity;
 
-public class User : BaseEntity
+[MongoCollection("user")]
+public class User : Base.Entity
 {
 	[BsonElement("firstname")]
 	public string FirstName { get; set; }
@@ -13,6 +14,7 @@ public class User : BaseEntity
 	public string Username { get; set; }
 	[BsonElement("password")]
 	public string Password { get; set; }
+	
 	[BsonElement("is_admin")]
 	public bool IsAdmin { get; set; }
 }

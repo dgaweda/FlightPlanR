@@ -1,4 +1,6 @@
-﻿using FlightPlanApi.Common.Configuration;
+﻿using System.Reflection;
+using FlightPlanApi.Common.Attributes;
+using FlightPlanApi.Common.Configuration;
 using FlightPlanR.DataAccess.Entity.Base;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -7,27 +9,26 @@ using MongoDB.Driver;
 
 namespace FlightPlanR.DataAccess.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity.Base.Entity
 {
-    private string CollectionName { get; }
-
     private readonly MongoConfiguration _configuration;
+    private readonly string _collection;
 
-    public Repository(IOptions<MongoConfiguration> configuration, string collectionName)
+    public Repository(IOptions<MongoConfiguration> configuration)
     {
         _configuration = configuration.Value;
-        CollectionName = collectionName;
+        _collection = typeof(TEntity).GetType().GetCustomAttribute<MongoCollectionAttribute>()?.CollectionName;
     }
-    protected IMongoCollection<BsonDocument> GetCollection(string collectionName)
+    protected IMongoCollection<BsonDocument> GetCollection()
     {
         var client = new MongoClient();
         var database = client.GetDatabase(_configuration.Name);
-        return database.GetCollection<BsonDocument>(collectionName);
+        return database.GetCollection<BsonDocument>(_collection);
     }
 
     public virtual async Task<List<TEntity>> FindAllAsync()
     {
-        var documents = await GetCollection(CollectionName)
+        var documents = await GetCollection()
             .Find(_ => true).ToListAsync();
 
         var entities = new List<TEntity>();
@@ -41,9 +42,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
 
     public virtual async Task<TEntity?> FindByIdAsync(string id)
     {
-        var collection = GetCollection(CollectionName);
+        var collection = GetCollection();
         var documentCursor = await collection
-            .FindAsync(Builders<BsonDocument>.Filter.Eq("id", id));
+            .FindAsync(Builders<BsonDocument>.Filter.Eq("document_id", id));
         var document = await documentCursor.FirstOrDefaultAsync();
         
         if (document is null) return null;
@@ -53,7 +54,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
 
     public virtual async Task<bool> InsertAsync<TRequest>(TRequest request)
     {
-        var collection = GetCollection(CollectionName);
+        var collection = GetCollection();
         var document = request.ToBsonDocument();
         await collection.InsertOneAsync(document);
         var result = await collection.FindAsync(Builders<BsonDocument>.Filter.AnyEq("_id", document["_id"]));
@@ -62,8 +63,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
 
     public virtual async Task<UpdateResult> UpdateAsync<TRequest>(string id, TRequest request)
     {
-        var collection = GetCollection(CollectionName);
-        var documentToUpdate = Builders<BsonDocument>.Filter.Eq("id", id);
+        var collection = GetCollection();
+        var documentToUpdate = Builders<BsonDocument>.Filter.Eq("document_id", id);
 
         if (documentToUpdate is null) return null;
 
@@ -72,7 +73,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
 
     public virtual async Task<DeleteResult> RemoveAsync(string id)
     {
-        return await GetCollection(CollectionName)
-            .DeleteOneAsync(Builders<BsonDocument>.Filter.Eq("id", id));
+        return await GetCollection().DeleteOneAsync(Builders<BsonDocument>.Filter.Eq("document_id", id));
     }
 }

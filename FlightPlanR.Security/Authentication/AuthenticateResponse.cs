@@ -1,8 +1,10 @@
-﻿namespace Security.Authentication;
+﻿using MongoDB.Bson;
+
+namespace Security.Authentication;
 
 public class AuthenticateResponse
 {
-	public string Id { get; set; }
+	public string UserId { get; set; }
 	public string FirstName { get; set; }
 	public string LastName { get; set; }
 	public string Username { get; set; }

@@ -1,12 +1,10 @@
 ﻿using FlightPlanApi.Common.Configuration;
-using FlightPlanR.DataAccess.Repositories.CountryRepository;
-using FlightPlanR.DataAccess.Repositories.DictionaryRepository;
 using FlightPlanR.DataAccess.Repositories.FlightPlanRepository;
 using FlightPlanR.DataAccess.Repositories.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Driver;
 
 namespace FlightPlanR.DataAccess;
 
@@ -18,12 +16,15 @@ public static class DependencyInjection
         {
             new IgnoreIfDefaultConvention(true)
         }, _ => true);
-        services.Configure<MongoConfiguration>(configuration.GetSection("Database:MongoDB").Bind);
-        services.AddSingleton<MongoConfiguration>();
+
+        var mongoConfig = new MongoConfiguration();
+        configuration.Bind("Database:MongoDB", mongoConfig);
+        
+        services.AddSingleton(mongoConfig);
+        services.AddSingleton<IMongoClient>(new MongoClient(mongoConfig.ConnectionString));
 
         services.AddScoped<IFlightPlanRepository, FlightPlanRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped(typeof(IDictionaryRepository<>), typeof(DictionaryRepository<>));
         return services;
     }
 }

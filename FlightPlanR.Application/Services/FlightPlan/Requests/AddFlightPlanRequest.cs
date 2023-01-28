@@ -4,7 +4,7 @@ namespace FlightPlanR.Application.Services.FlightPlan.Requests;
 
 public record AddFlightPlanRequest
 {
-	[BsonElement("id")] 
+	[BsonElement("flight_plan_id")] 
 	public string? Id { get; set; } = Guid.NewGuid().ToString("N");
 	
 	[BsonElement("aircraft_identification")]

@@ -3,11 +3,12 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace FlightPlanR.DataAccess.Entity.Base;
 
-public abstract class BaseEntity
+public abstract class Entity
 {
     [BsonId]
-    public ObjectId ObjectId { get; set; }
-
-    [BsonElement("document_id")] 
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; set; }
+   
+    [BsonElement("document_id")]
     public string DocumentId { get; set; }
 }

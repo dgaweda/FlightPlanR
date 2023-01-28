@@ -1,9 +1,11 @@
-﻿using FlightPlanR.DataAccess.Entity.Base;
+﻿using FlightPlanApi.Common.Attributes;
+using FlightPlanR.DataAccess.Entity.Base;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace FlightPlanR.DataAccess.Entity;
 
-public class FlightPlan : BaseEntity
+[MongoCollection("flight_plans")]
+public class FlightPlan : Base.Entity
 {
     [BsonElement("aircraft_identification")]
     public string? AircraftIdentification { get; set; }
