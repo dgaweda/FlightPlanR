@@ -34,13 +34,15 @@ public class UserService : IUserService
 		await _userRepository.RemoveAsync(userId).ThrowIfOperationFailed();
 	}
 
-	public async Task EditUser(string userId, UpdateUserRequest user)
+	public async Task<string> EditUser(string userId, UpdateUserRequest user)
 	{
 		var result = _mapper.Map<DataAccess.Entity.User>(user);
 		await _userRepository.UpdateAsync(userId, result).ThrowIfOperationFailed();
+
+		return result.DocumentId;
 	}
 	
-	public async Task AddUser(AddUserRequest userData)
+	public async Task<string> AddUser(AddUserRequest userData)
 	{
 		var user = await _userRepository.FindByUsername(userData.Username);
 		if (user is not null)
@@ -49,5 +51,7 @@ public class UserService : IUserService
 		userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
 		var result = _mapper.Map<DataAccess.Entity.User>(userData);
 		await _userRepository.InsertAsync(result).ThrowIfOperationFailed();
+
+		return result.DocumentId;
 	}
 }

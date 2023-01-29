@@ -32,18 +32,21 @@ public class FlightPlanService : IFlightPlanService
         return result;
     }
 
-    public async Task InsertOneAsync(AddFlightPlanRequest request)
+    public async Task<string> InsertOneAsync(AddFlightPlanRequest request)
     {
         var result = _mapper.Map<DataAccess.Entity.FlightPlan>(request);
         await _flightPlanRepository.InsertAsync(result)
             .ThrowIfOperationFailed();
+        return result.DocumentId;
     }
 
-    public async Task UpdateAsync(string id, UpdateFlightPlanRequest request)
+    public async Task<string> UpdateAsync(string id, UpdateFlightPlanRequest request)
     {
         var result = _mapper.Map<DataAccess.Entity.FlightPlan>(request);
         await _flightPlanRepository.UpdateAsync(id, result)
             .ThrowIfOperationFailed();
+
+        return result.DocumentId;
     }
 
     public async Task RemoveAsync(string flightPlanId)

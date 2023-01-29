@@ -38,11 +38,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity.B
         return entity;
     }
 
-    public virtual async Task<bool> InsertAsync(TEntity entity)
+    public virtual async Task<string> InsertAsync(TEntity entity)
     {
         await Collection.InsertOneAsync(entity);
         var result = await Collection.FindAsync(x => x.DocumentId == entity.DocumentId);
-        return result.FirstOrDefault() is not null;
+        return result.FirstOrDefault().Id;
     }
 
     public virtual async Task<UpdateResult> UpdateAsync(string id, TEntity entity)

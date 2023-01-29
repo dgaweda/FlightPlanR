@@ -14,10 +14,10 @@ public static class MongoOperationsExceptionExtensions
 		return result;
 	} 
 	
-	public static async Task ThrowIfOperationFailed(this Task<bool> resultTask)
+	public static async Task ThrowIfOperationFailed(this Task<string> resultTask)
 	{
 		var result = await resultTask;
-		if (!result)
+		if (result is null)
 		{
 			throw new BadRequestException("Operation failed.");
 		}
