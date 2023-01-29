@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using FlightPlanApi.Common.Exceptions;
 using FlightPlanR.DataAccess.Entity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -11,9 +12,11 @@ namespace Security.Authentication;
 public class JwtHandler : IJwtHandler
 {
 	private readonly JwtOptions _jwtOptions;
-	public JwtHandler(IOptions<JwtOptions> jwtOptions)
+	private readonly TokenValidationParameters _tokenValidationParameters;
+	public JwtHandler(JwtOptions jwtOptions, IOptionsMonitor<JwtBearerOptions> jwtBearerOptions)
 	{
-		_jwtOptions = jwtOptions.Value;
+		_jwtOptions = jwtOptions;
+		_tokenValidationParameters = jwtBearerOptions.Get(JwtBearerDefaults.AuthenticationScheme).TokenValidationParameters;
 	}
 	
 	public Task<string> GenerateToken(User user)
@@ -27,7 +30,8 @@ public class JwtHandler : IJwtHandler
 				new Claim(JwtRegisteredClaimNames.Jti, user.DocumentId),
 				new Claim(JwtRegisteredClaimNames.Sub, user.Username),
 				new Claim("firstname", user.FirstName),
-				new Claim("lastname", user.LastName)
+				new Claim("lastname", user.LastName),
+				new Claim(JwtRegisteredClaimNames.Iss, _jwtOptions.Issuer)
 			}),
 			Expires = DateTime.UtcNow.AddHours(1),
 			SigningCredentials =
@@ -43,19 +47,11 @@ public class JwtHandler : IJwtHandler
 			return Task.FromResult<string>(null);
 
 		var tokenHandler = new JwtSecurityTokenHandler();
-		var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
 		try
 		{
-			tokenHandler.ValidateToken(token, new TokenValidationParameters
-			{
-				ValidateIssuerSigningKey = true,
-				IssuerSigningKey = new SymmetricSecurityKey(key),
-				ValidateIssuer = false,
-				ClockSkew = TimeSpan.Zero
-			}, out var validatedToken);
-
-			var jwtToken = (JwtSecurityToken)validatedToken;
-			var userId = jwtToken.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value;
+			tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
+			
+			var userId = ((JwtSecurityToken)validatedToken).Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value;
 			return Task.FromResult(userId);
 		}
 		catch

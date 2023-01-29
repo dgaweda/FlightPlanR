@@ -42,7 +42,6 @@ app.UseCors(config =>
         .AllowAnyHeader();
 });
 
-app.UseAuthentication();
 app.UseCustomeMiddlewares();
 app.UseHttpsRedirection();
 app.UseAuthorization();
