@@ -19,29 +19,25 @@ public class UserController : BaseController
 	[AllowAnonymous]
 	public async Task<IActionResult> AddUser(AddUserRequest request)
 	{
-		await _userService.AddUser(request);
-		return Ok();
+		return Ok(await _userService.AddUser(request));
 	}
 	
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetUserById(string id)
 	{
-		var result = await _userService.GetUserById(id);
-		return Ok(result);
+		return Ok(await _userService.GetUserById(id));
 	}
 	
 	[HttpGet]
 	public async Task<IActionResult> GetUserByUsername(string username)
 	{
-		var result = await _userService.GetUserByUsername(username);
-		return Ok(result);
+		return Ok(await _userService.GetUserByUsername(username));
 	}
 	
 	[HttpPut("{id}")]
 	public async Task<IActionResult> UpdateUser(string id, UpdateUserRequest request)
 	{
-		await _userService.EditUser(id, request);
-		return Ok();
+		return Ok(await _userService.EditUser(id, request));
 	}
 	
 	[HttpDelete("{id}")] 

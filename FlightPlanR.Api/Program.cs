@@ -48,3 +48,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+/// <summary>
+/// Created for testing purpose
+/// </summary>
+public partial class Program {} 

@@ -15,7 +15,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity.B
 
     public Repository(MongoConfiguration configuration, IMongoClient mongoClient)
     {
-        _database = mongoClient.GetDatabase(configuration.Name);
+        _database = mongoClient.GetDatabase(configuration.DbName);
         Collection = GetCollection();
     }
     

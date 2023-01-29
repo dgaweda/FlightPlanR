@@ -19,29 +19,26 @@ public class FlightPlanController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> FindAll()
     {
-        var result = await _flightPlanService.FindAllAsync();
-        return Ok(result);
+        return Ok(await _flightPlanService.FindAllAsync());
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> FindById([FromRoute] string id)
     {
-        var result = await _flightPlanService.FindByIdAsync(id);
-        return Ok(result);
+        return Ok(await _flightPlanService.FindByIdAsync(id));
     }
     
     [HttpPost]
     public async Task<IActionResult> Insert(AddFlightPlanRequest flightPlanRequest)
     {
-        await _flightPlanService.InsertOneAsync(flightPlanRequest);
-        return Ok();
+        
+        return Ok(await _flightPlanService.InsertOneAsync(flightPlanRequest));
     }
     
     [HttpPut("{documentId}")]
     public async Task<IActionResult> Update(string documentId, UpdateFlightPlanRequest flightPlan)
     {
-        await _flightPlanService.UpdateAsync(documentId, flightPlan);
-        return Ok();
+        return Ok(await _flightPlanService.UpdateAsync(documentId, flightPlan));
     }
     
     [HttpDelete("{id}")]
