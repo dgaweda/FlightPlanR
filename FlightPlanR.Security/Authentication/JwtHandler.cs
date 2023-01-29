@@ -60,7 +60,7 @@ public class JwtHandler : IJwtHandler
 		}
 		catch
 		{
-			return null;
+			return Task.FromResult<string>(null);
 		}
 	}
 }

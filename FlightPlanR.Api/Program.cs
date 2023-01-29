@@ -1,4 +1,5 @@
 using System.Reflection;
+using FlightPlanApi;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
 using FlightPlanR.DataAccess;
@@ -16,43 +17,7 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 // Add Basic services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("flightplanr", new OpenApiInfo
-    {
-        Title = "Flight Plan API",
-        Version = "v3",
-        Description = "FlightPlanR Web API with NO-SQL DB"
-    });
-    
-    options.AddSecurityDefinition("jwt", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        In = ParameterLocation.Header,
-        Description = "Json Web Token Bearer Authorization"
-    });
-    
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "jwt"
-                }
-            },
-            new string[] { }
-        }
-        
-    });
-    options.EnableAnnotations();
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-});
+builder.Services.AddSwaggerConfig();
 builder.Services.AddCors();
 
 // Add custom services to the container.
@@ -77,6 +42,7 @@ app.UseCors(config =>
         .AllowAnyHeader();
 });
 
+app.UseAuthentication();
 app.UseCustomeMiddlewares();
 app.UseHttpsRedirection();
 app.UseAuthorization();

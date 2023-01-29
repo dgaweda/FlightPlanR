@@ -1,6 +1,7 @@
 ﻿using FlightPlanApi.Common.Exceptions;
 using FlightPlanApi.Common.Extensions;
 using FlightPlanR.DataAccess.Entity;
+using FlightPlanR.Tests.Common.FakeModels;
 using FluentAssertions;
 using MongoDB.Driver;
 using Xunit;

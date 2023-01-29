@@ -57,7 +57,7 @@ public class ErrorHandlerMiddleware
         }
     }
 
-    private string CreateMessage(Exception ex) => $"{ex.Message}\n\n{ex.Source}\n{ex.StackTrace}";
+    private string CreateMessage(Exception ex) => $"{ex.Message}\n{ex.Source}\n{ex.StackTrace}";
 
     private string SerializeMessage(Exception ex)
     {

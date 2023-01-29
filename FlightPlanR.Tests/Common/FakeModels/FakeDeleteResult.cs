@@ -1,4 +1,4 @@
-﻿namespace FlightPlanR.Tests.Common;
+﻿namespace FlightPlanR.Tests.Common.FakeModels;
 
 public class FakeDeleteResult : MongoDB.Driver.DeleteResult
 {

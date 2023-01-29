@@ -12,11 +12,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDataAccessServices(this IServiceCollection services, IConfiguration configuration)
     {
-        ConventionRegistry.Register("Ignore", new ConventionPack
-        {
-            new IgnoreIfDefaultConvention(true)
-        }, _ => true);
-
         var mongoConfig = new MongoConfiguration();
         configuration.Bind("Database:MongoDB", mongoConfig);
         

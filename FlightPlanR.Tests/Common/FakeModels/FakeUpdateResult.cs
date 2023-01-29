@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace FlightPlanR.Tests.Common;
+namespace FlightPlanR.Tests.Common.FakeModels;
 
 public class FakeUpdateResult : UpdateResult
 {
