@@ -7,15 +7,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FlightPlanR.Common\FlightPlanR.Common.csproj" />
-      <ProjectReference Include="..\FlightPlanR.DataAccess\FlightPlanR.DataAccess.csproj" />
+      <ProjectReference Include="..\FlightPlanR.Domain\FlightPlanR.Domain.csproj" />
+      <ProjectReference Include="..\FlightPlanR.Infrastructure\FlightPlanR.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
       <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
       <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\FlightPlan\DTO" />
     </ItemGroup>
 
 </Project>

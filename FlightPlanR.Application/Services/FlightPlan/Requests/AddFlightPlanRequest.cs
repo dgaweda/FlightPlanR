@@ -1,4 +1,4 @@
-﻿using FlightPlanApi.Common;
+﻿using FlightPlanR.Domain.Common;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace FlightPlanR.Application.Services.FlightPlan.Requests;

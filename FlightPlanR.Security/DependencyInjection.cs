@@ -42,7 +42,7 @@ public static class DependencyInjection
     services.AddScoped<IJwtHandler, JwtHandler>();
     services.AddHttpContextAccessor();
     services.AddSingleton<ICurrentUserService, CurrentUserService>();
-    services.AddScoped<IAuthenticationService, AuthenticationService>();
+    services.AddScoped<IAccountService, AccountService>();
 
     return services;
   }

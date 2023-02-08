@@ -1,4 +1,5 @@
-﻿using FlightPlanApi.Common.Configuration;
+﻿using FlightPlanApi;
+using FlightPlanR.Domain.Common.Configuration;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace FlightPlanR.IntegrationTest.Configuration;

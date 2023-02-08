@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Security.Attribute;
+﻿using FlightPlanR.Application.Common.Security.Attribute;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers.Base;
 

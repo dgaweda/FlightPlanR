@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using FlightPlanApi.Common.Extensions;
+using FlightPlanR.Application.Common.Extensions;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
-using FlightPlanR.DataAccess.Repositories.FlightPlanRepository;
+using FlightPlanR.Infrastructure.Repository.FlightPlanRepository;
 
 namespace FlightPlanR.Application.Services.FlightPlan;
 
@@ -16,7 +16,7 @@ public class FlightPlanService : IFlightPlanService
         _mapper = mapper;
     }
 
-    public async Task<List<DataAccess.Entity.FlightPlan>> FindAllAsync()
+    public async Task<List<Domain.Entities.FlightPlan>> FindAllAsync()
     {
         var result = await _flightPlanRepository.FindAllAsync()
             .ThrowIfOperationFailed();
@@ -24,7 +24,7 @@ public class FlightPlanService : IFlightPlanService
         return result;
     }
 
-    public async Task<DataAccess.Entity.FlightPlan> FindByIdAsync(string flightPlanId)
+    public async Task<Domain.Entities.FlightPlan> FindByIdAsync(string flightPlanId)
     {
         var result = await _flightPlanRepository.FindByIdAsync(flightPlanId)
             .ThrowIfOperationFailed();
@@ -34,7 +34,7 @@ public class FlightPlanService : IFlightPlanService
 
     public async Task<string> InsertOneAsync(AddFlightPlanRequest request)
     {
-        var result = _mapper.Map<DataAccess.Entity.FlightPlan>(request);
+        var result = _mapper.Map<Domain.Entities.FlightPlan>(request);
         await _flightPlanRepository.InsertAsync(result)
             .ThrowIfOperationFailed();
         return result.DocumentId;
@@ -42,7 +42,7 @@ public class FlightPlanService : IFlightPlanService
 
     public async Task<string> UpdateAsync(string id, UpdateFlightPlanRequest request)
     {
-        var result = _mapper.Map<DataAccess.Entity.FlightPlan>(request);
+        var result = _mapper.Map<Domain.Entities.FlightPlan>(request);
         await _flightPlanRepository.UpdateAsync(id, result)
             .ThrowIfOperationFailed();
 

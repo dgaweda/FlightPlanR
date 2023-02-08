@@ -1,4 +1,4 @@
-﻿using Security.Middleware;
+﻿using FlightPlanR.Application.Services.Middleware;
 
 namespace FlightPlanApi.Middleware;
 

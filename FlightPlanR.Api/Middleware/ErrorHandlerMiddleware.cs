@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using FlightPlanApi.Common.Exceptions;
+using FlightPlanR.Application.Common.Exceptions;
 
 namespace FlightPlanApi.Middleware;
 

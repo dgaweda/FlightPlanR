@@ -1,10 +1,10 @@
 ﻿using System.Net;
-using FlightPlanR.Application.Services.FlightPlan.Requests;
+using FlightPlanApi;
 using FlightPlanR.IntegrationTest.Configuration;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace FlightPlanR.IntegrationTest;
+namespace FlightPlanR.IntegrationTest.FlightPlanTests;
 
 public class FlightPlanControllerTests : IntegrationTestsConfiguration
 {

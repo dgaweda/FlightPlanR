@@ -1,10 +1,7 @@
-using System.Reflection;
 using FlightPlanApi;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
-using FlightPlanR.DataAccess;
-using Microsoft.OpenApi.Models;
-using Security;
+using FlightPlanR.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,9 +18,8 @@ builder.Services.AddSwaggerConfig();
 builder.Services.AddCors();
 
 // Add custom services to the container.
-builder.Services.AddSecurityServices(builder.Configuration);
-builder.Services.AddDataAccessServices(builder.Configuration);
-builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -49,7 +45,10 @@ app.MapControllers();
 
 app.Run();
 
-/// <summary>
-/// Created for testing purpose
-/// </summary>
-public partial class Program {} 
+namespace FlightPlanApi
+{
+    /// <summary>
+    /// Created for testing purpose
+    /// </summary>
+    public partial class Program {}
+} 
