@@ -1,4 +1,5 @@
-﻿using FlightPlanR.Domain.Common;
+﻿using FlightPlanR.Application.Common.Interfaces;
+using FlightPlanR.Domain.Common;
 using FlightPlanR.Domain.Common.Attributes;
 using FlightPlanR.Infrastructure.Common;
 using FlightPlanR.Infrastructure.Common.Configuration;

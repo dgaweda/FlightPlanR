@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\FlightPlanR.Application\FlightPlanR.Application.csproj" />
       <ProjectReference Include="..\FlightPlanR.Domain\FlightPlanR.Domain.csproj" />
     </ItemGroup>
 

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using FlightPlanR.Application.Common.Exceptions;
 using FlightPlanR.Application.Common.Extensions;
+using FlightPlanR.Application.Common.Interfaces;
 using FlightPlanR.Application.Common.Security.Authentication;
+using FlightPlanR.Application.Services.Account.DTO;
 using FlightPlanR.Application.Services.Account.Request;
-using FlightPlanR.Application.Services.Account.Response;
-using FlightPlanR.Infrastructure.Repository.User;
 
 namespace FlightPlanR.Application.Services.Account;
 

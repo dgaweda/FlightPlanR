@@ -1,10 +1,14 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace FlightPlanR.Application.Services.Account.Request;
 
-public class RegisterUserRequest : Domain.Common.Request
+public record RegisterUserRequest
 {
-
+	[BsonElement("document_id")]
+	[JsonIgnore]
+	public string DocumentId { get; set; } = Guid.NewGuid().ToString("N");
+	
 	[BsonElement("firstname")]
 	public string FirstName { get; set; }
 	[BsonElement("lastname")]

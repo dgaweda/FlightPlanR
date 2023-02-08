@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FlightPlanR.Domain\FlightPlanR.Domain.csproj" />
-      <ProjectReference Include="..\FlightPlanR.Infrastructure\FlightPlanR.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -19,10 +18,6 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
       <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Services\FlightPlan\DTO" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace FlightPlanR.Infrastructure.Repository.User;
+﻿namespace FlightPlanR.Application.Common.Interfaces;
 
 public interface IUserRepository : IRepository<Domain.Entities.User>
 {

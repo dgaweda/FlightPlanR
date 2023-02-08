@@ -1,5 +1,5 @@
-﻿using FlightPlanR.Application.Services.Account.Request;
-using FlightPlanR.Application.Services.Account.Response;
+﻿using FlightPlanR.Application.Services.Account.DTO;
+using FlightPlanR.Application.Services.Account.Request;
 
 namespace FlightPlanR.Application.Services.Account;
 

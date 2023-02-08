@@ -16,6 +16,7 @@ public static class DependencyInjection
     services.AddScoped<IFlightPlanService, FlightPlanService>();
     services.AddScoped<IUserService, UserService>();
     services.AddScoped<IAccountService, AccountService>();
+    
     return services;
   }
 }

@@ -1,10 +1,15 @@
 ﻿using FlightPlanR.Domain.Common;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace FlightPlanR.Application.Services.FlightPlan.Requests;
 
-public class AddFlightPlanRequest : Request
+public record AddFlightPlanRequest
 {
+	[BsonElement("document_id")]
+	[JsonIgnore]
+	public string DocumentId { get; set; } = Guid.NewGuid().ToString("N");
+	
 	[BsonElement("aircraft_identification")]
 	public string? AircraftIdentification { get; set; }
     

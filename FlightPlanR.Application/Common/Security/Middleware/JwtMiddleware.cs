@@ -2,7 +2,7 @@
 using FlightPlanR.Application.Services.Account;
 using Microsoft.AspNetCore.Http;
 
-namespace FlightPlanR.Application.Services.Middleware;
+namespace FlightPlanR.Application.Common.Security.Middleware;
 
 public class JwtMiddleware
 {

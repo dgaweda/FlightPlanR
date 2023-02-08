@@ -1,4 +1,4 @@
-﻿namespace FlightPlanR.Application.Services.Account.Response;
+﻿namespace FlightPlanR.Application.Services.Account.DTO;
 
 public class AuthenticateDto
 {

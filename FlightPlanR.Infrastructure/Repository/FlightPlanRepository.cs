@@ -1,4 +1,5 @@
-﻿using FlightPlanR.Domain.Entities;
+﻿using FlightPlanR.Application.Common.Interfaces;
+using FlightPlanR.Domain.Entities;
 using FlightPlanR.Infrastructure.Common.Configuration;
 using MongoDB.Driver;
 

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FlightPlanR.Application.Common.Extensions;
+using FlightPlanR.Application.Common.Interfaces;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
-using FlightPlanR.Infrastructure.Repository.FlightPlanRepository;
 
 namespace FlightPlanR.Application.Services.FlightPlan;
 

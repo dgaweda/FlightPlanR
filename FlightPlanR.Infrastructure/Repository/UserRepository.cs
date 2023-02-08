@@ -1,4 +1,5 @@
-﻿using FlightPlanR.Infrastructure.Common.Configuration;
+﻿using FlightPlanR.Application.Common.Interfaces;
+using FlightPlanR.Infrastructure.Common.Configuration;
 using MongoDB.Driver;
 
 namespace FlightPlanR.Infrastructure.Repository.User;

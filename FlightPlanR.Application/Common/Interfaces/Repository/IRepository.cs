@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace FlightPlanR.Infrastructure.Repository;
+namespace FlightPlanR.Application.Common.Interfaces;
 
 public interface IRepository<TEntity>
 {
