@@ -9,6 +9,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { FlightPlansComponent } from './pages/flight-plans/flight-plans.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { LoginComponent } from './pages/login/login.component';
+import { PrimeNgComponentsModule } from "./common/prime-ng/prime-ng.module";
+import { FormsModule } from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {LocalStorageService} from "./common/localStorage.service";
+import {AccountService} from "./services/account.service";
+import {FlightPlanService} from "./services/flight-plan.service";
 
 @NgModule({
   declarations: [
@@ -21,8 +27,14 @@ import { LoginComponent } from './pages/login/login.component';
     LoginComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PrimeNgComponentsModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  exports: [
+    AppRoutingModule,
+    PrimeNgComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

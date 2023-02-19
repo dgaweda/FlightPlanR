@@ -11,7 +11,7 @@ export class UserService extends BaseApiService {
   }
 
   getById(id: string): Observable<User> {
-    return this.get(this.apiRoutes.user.getById.setId(id));
+    return this.get(this.apiRoutes.user.getById.setRouteId(id));
   }
 
   getByUsername(username: string): Observable<User> {
@@ -19,10 +19,10 @@ export class UserService extends BaseApiService {
   }
 
   updateUser(id: string, userData: User): Observable<void> {
-    return this.put(this.apiRoutes.user.update.setId(id), userData);
+    return this.put(this.apiRoutes.user.update.setRouteId(id), userData);
   }
 
   removeUser(id: string): Observable<void> {
-    return this.delete(this.apiRoutes.user.remove.setId(id));
+    return this.delete(this.apiRoutes.user.remove.setRouteId(id));
   }
 }

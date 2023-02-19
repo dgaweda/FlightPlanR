@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {FlightPlansComponent} from "./pages/flight-plans/flight-plans.component";
 import {AdministrationComponent} from "./pages/administration/administration.component";
+import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'administration',
     component: AdministrationComponent,
     title: 'FlightPlanR - Administration'
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'FlightPlanR - Login'
   },
   {
     path: '**',

@@ -6,11 +6,15 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import 'bootstrap-base.scss';
 @import 'layout.scss';
+@import 'navbar.scss';
+@import 'prime-ng.buttons.scss';
 
 body {
   min-height: 100%;
   display:flex;
   flex-direction: column;
+  background: #183462;
+  color: white;
 }
 
 .is-active {
@@ -28,12 +32,12 @@ a {
 }
 
 a:link, a:visited {
-  color: #464646;
+  color: #46a215;
   font-weight: bold;
   font-style: normal;
   text-decoration: none;
 }
 
 a:focus, a:hover {
-  color: lighten(#464646, 30%);
+  color: lighten(#46a215, 30%);
 }

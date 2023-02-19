@@ -14,7 +14,7 @@ export const httpOptions = {
   withCredentials: true
 };
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class BaseApiService extends BaseComponent {
   protected apiRoutes = ApiRoutes;
 

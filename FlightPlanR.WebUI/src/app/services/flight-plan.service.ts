@@ -4,7 +4,7 @@ import {BaseApiService} from "../common/base.service";
 import {Observable} from "rxjs";
 import {FlightPlan} from "../models/flight-plan.model";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FlightPlanService extends BaseApiService{
   constructor(http: HttpClient) {
     super(http);
@@ -15,7 +15,7 @@ export class FlightPlanService extends BaseApiService{
   }
 
   getById(id: string): Observable<FlightPlan> {
-    return this.get(this.apiRoutes.flightPlan.getById.setId(id));
+    return this.get(this.apiRoutes.flightPlan.getById.setRouteId(id));
   }
 
   addFlightPlan(flightPlan: FlightPlan): Observable<void> {
@@ -23,14 +23,14 @@ export class FlightPlanService extends BaseApiService{
   }
 
   updateFlightPlan(id: string, flightPlan: FlightPlan): Observable<void> {
-    return this.put(this.apiRoutes.flightPlan.update.setId(id), flightPlan);
+    return this.put(this.apiRoutes.flightPlan.update.setRouteId(id), flightPlan);
   }
 
   removeFlightPlan(id: string): Observable<void> {
-    return this.delete(this.apiRoutes.flightPlan.remove.setId(id));
+    return this.delete(this.apiRoutes.flightPlan.remove.setRouteId(id));
   }
 
   getFlightPlanTimeEnroute(id: string): Observable<string> {
-    return this.get(this.apiRoutes.flightPlan.getFlightPlanEnroute.setId(id));
+    return this.get(this.apiRoutes.flightPlan.getFlightPlanEnroute.setRouteId(id));
   }
 }

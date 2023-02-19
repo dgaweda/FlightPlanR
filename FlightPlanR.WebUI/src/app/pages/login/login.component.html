@@ -1,1 +1,16 @@
-<p>login works!</p>
+<p-card header="Login">
+  <ng-template pTemplate="content">
+    <span class="p-float-label">
+      <input id="username" type="text" pInputText [(ngModel)]="authenticateRequest.username">
+      <label for="username">Username</label>
+    </span>
+    <span class="p-float-label">
+      <input id="password" type="text" pInputText [(ngModel)]="authenticateRequest.password">
+      <label for="password">Password</label>
+    </span>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check-square" label="Login" (onClick)="login()"></p-button>
+    <p-button icon="pi pi-sign-in" label="Register"></p-button>
+  </ng-template>
+</p-card>

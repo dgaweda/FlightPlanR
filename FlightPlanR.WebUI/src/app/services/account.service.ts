@@ -8,7 +8,7 @@ import {User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../common/localStorage.service";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AccountService extends BaseApiService {
   private user$: BehaviorSubject<User | null>;
   public user: Observable<User | null>;

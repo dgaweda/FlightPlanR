@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {User} from "../models/user.model";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LocalStorageService {
   public getItem<T>(key: string): T | null {
     const item = localStorage.getItem(key);
