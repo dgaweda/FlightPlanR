@@ -26,7 +26,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
 
     public virtual async Task<List<TEntity>> FindAllAsync()
     {
-        var entities = await GetCollection().Find(_ => true).ToListAsync();
+        var entities = await Collection.Find(_ => true).ToListAsync();
         return entities ?? new List<TEntity>();
     }
 

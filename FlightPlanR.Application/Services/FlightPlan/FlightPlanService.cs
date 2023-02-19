@@ -54,4 +54,13 @@ public class FlightPlanService : IFlightPlanService
         await _flightPlanRepository.RemoveAsync(flightPlanId)
             .ThrowIfOperationFailed();
     }
+
+    public async Task<TimeSpan?> GetFlightPlanEnroute(string flightPlanId)
+    {
+        var flightPlan = await _flightPlanRepository.FindByIdAsync(flightPlanId)
+            .ThrowIfOperationFailed();
+
+        var enrouteTime = flightPlan.DepartureTime - flightPlan.ArrivalTime;
+        return enrouteTime;
+    }
 }

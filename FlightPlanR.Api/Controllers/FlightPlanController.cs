@@ -22,10 +22,10 @@ public class FlightPlanController : BaseController
         return Ok(await _flightPlanService.FindAllAsync());
     }
     
-    [HttpGet("{id}")]
-    public async Task<IActionResult> FindById([FromRoute] string id)
+    [HttpGet("{documentId}")]
+    public async Task<IActionResult> FindById([FromRoute] string documentId)
     {
-        return Ok(await _flightPlanService.FindByIdAsync(id));
+        return Ok(await _flightPlanService.FindByIdAsync(documentId));
     }
     
     [HttpPost]
@@ -41,25 +41,17 @@ public class FlightPlanController : BaseController
         return Ok(await _flightPlanService.UpdateAsync(documentId, flightPlan));
     }
     
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromRoute] string id)
+    [HttpDelete("{documentId}")]
+    public async Task<IActionResult> Delete([FromRoute] string documentId)
     {
-        await _flightPlanService.RemoveAsync(id);
+        await _flightPlanService.RemoveAsync(documentId);
         return Ok();
     }
-    
-    [HttpGet("route/{id}")]
-    public async Task<IActionResult> GetFlightPlanRoute([FromRoute] string id)
+
+    [HttpGet("route/time/{documentId}")]
+    public async Task<IActionResult> GetFlightPlanTimeEnroute([FromRoute] string documentId)
     {
-        throw new NotImplementedException();
-        // TODO: implement method 
-    }
-    
-    [HttpGet("route/time/{id}")]
-    public async Task<IActionResult> GetFlightPlanTimeEnroute([FromRoute] string id)
-    {
-        throw new NotImplementedException();
-        // TODO: implement method
+        return Ok(await _flightPlanService.GetFlightPlanEnroute(documentId));
     }
 }
 

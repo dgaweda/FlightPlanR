@@ -9,4 +9,5 @@ public interface IFlightPlanService
     Task<string> InsertOneAsync(AddFlightPlanRequest request);
     Task<string> UpdateAsync(string id, UpdateFlightPlanRequest request);
     Task RemoveAsync(string flightPlanId);
+    Task<TimeSpan?> GetFlightPlanEnroute(string flightPlanId);
 }
