@@ -1,16 +1,18 @@
 <p-card header="Login">
   <ng-template pTemplate="content">
-    <span class="p-float-label">
-      <input id="username" type="text" pInputText [(ngModel)]="authenticateRequest.username">
-      <label for="username">Username</label>
-    </span>
-    <span class="p-float-label">
-      <input id="password" type="text" pInputText [(ngModel)]="authenticateRequest.password">
-      <label for="password">Password</label>
-    </span>
+  <span class="p-float-label mt-md-4">
+    <input id="username" type="text" pInputText [(ngModel)]="authenticateRequest.username">
+    <label for="username">Username</label>
+  </span>
+  <span class="p-float-label mt-md-4">
+    <input id="password" type="text" pInputText [(ngModel)]="authenticateRequest.password">
+    <label for="password">Password</label>
+  </span>
   </ng-template>
+
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check-square" label="Login" (onClick)="login()"></p-button>
-    <p-button icon="pi pi-sign-in" label="Register"></p-button>
+      <p-button class="mx-md-2 d-block" icon="pi pi-check-square" label="Login" (onClick)="login()"></p-button>
+      <p-button class="mx-md-2 d-block" icon="pi pi-sign-in" label="Register"></p-button>
   </ng-template>
 </p-card>
+

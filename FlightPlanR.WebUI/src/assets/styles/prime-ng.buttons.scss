@@ -1,4 +1,16 @@
 .p-button {
+  display: block;
   background: darken(#4fe8d0, 20%) !important;
   border-color: darken(#4fe8d0, 20%) !important;
+  color: black;
+  margin: 5px !important;
+}
+.p-card-footer {
+  p-button:nth-child(2) > button {
+    display: block;
+  }
+
+  p-button:nth-child(1) > button {
+    display: block;
+  }
 }

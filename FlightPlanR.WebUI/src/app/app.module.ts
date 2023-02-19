@@ -11,10 +11,8 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { LoginComponent } from './pages/login/login.component';
 import { PrimeNgComponentsModule } from "./common/prime-ng/prime-ng.module";
 import { FormsModule } from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
-import {LocalStorageService} from "./common/localStorage.service";
-import {AccountService} from "./services/account.service";
-import {FlightPlanService} from "./services/flight-plan.service";
+import { HttpClientModule } from "@angular/common/http";
+import {StyleClassModule} from "primeng/styleclass";
 
 @NgModule({
   declarations: [
@@ -30,13 +28,14 @@ import {FlightPlanService} from "./services/flight-plan.service";
     AppRoutingModule,
     PrimeNgComponentsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StyleClassModule
   ],
   exports: [
     AppRoutingModule,
     PrimeNgComponentsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

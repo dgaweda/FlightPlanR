@@ -15,7 +15,8 @@ export class LoginComponent {
   }
 
   public login(): void {
-    this.accountService.authenticate(this.authenticateRequest);
+    console.log(this.authenticateRequest);
+    // this.accountService.authenticate(this.authenticateRequest);
   }
 
   public redirectToRegister(): void {
