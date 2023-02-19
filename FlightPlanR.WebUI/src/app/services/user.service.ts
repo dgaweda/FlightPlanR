@@ -19,14 +19,10 @@ export class UserService extends BaseApiService {
   }
 
   updateUser(id: string, userData: User): Observable<void> {
-    return this.put(this.apiRoutes.user.update.replace(':id', id), userData);
-  }
-
-  register(user: User): Observable<void> {
-    return this.post(this.apiRoutes.user.register, user);
+    return this.put(this.apiRoutes.user.update.setApiRouteId(id), userData);
   }
 
   removeUser(id: string): Observable<void> {
-    return this.delete(this.apiRoutes.user.remove.replace(':id', id));
+    return this.delete(this.apiRoutes.user.remove.setApiRouteId(id));
   }
 }

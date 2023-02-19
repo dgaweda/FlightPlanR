@@ -15,7 +15,7 @@ export class FlightPlanService extends BaseApiService{
   }
 
   getById(id: string): Observable<FlightPlan> {
-    return this.get(this.apiRoutes.flightPlan.getById.replace(':id', id));
+    return this.get(this.apiRoutes.flightPlan.getById.setApiRouteId(id));
   }
 
   addFlightPlan(flightPlan: FlightPlan): Observable<void> {
@@ -23,18 +23,14 @@ export class FlightPlanService extends BaseApiService{
   }
 
   updateFlightPlan(id: string, flightPlan: FlightPlan): Observable<void> {
-    return this.put(this.apiRoutes.flightPlan.update.replace(':id', id), flightPlan);
+    return this.put(this.apiRoutes.flightPlan.update.setApiRouteId(id), flightPlan);
   }
 
   removeFlightPlan(id: string): Observable<void> {
-    return this.delete(this.apiRoutes.flightPlan.remove.replace(':id', id));
-  }
-
-  getFlightPlanRoute(id: string): Observable<string> {
-    return this.get(this.apiRoutes.flightPlan.getFlightPlanRoute.replace(':id', id));
+    return this.delete(this.apiRoutes.flightPlan.remove.setApiRouteId(id));
   }
 
   getFlightPlanTimeEnroute(id: string): Observable<string> {
-    return this.get(this.apiRoutes.flightPlan.getFlightPlanEnroute.replace(':id', id));
+    return this.get(this.apiRoutes.flightPlan.getFlightPlanEnroute.setApiRouteId(id));
   }
 }

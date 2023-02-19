@@ -2,9 +2,11 @@ import {environment} from "../environments/environment";
 
 export const ApiRoutes = {
   baseUrl: `${environment.baseApiRoute}`,
-  authenticate: 'authenticate',
+  account: {
+    authenticate: 'authenticate',
+    register: 'register'
+  },
   user: {
-    register: 'user/register',
     getById: 'user/:id',
     getByUserName: 'user',
     update: 'user/:id',
@@ -16,7 +18,6 @@ export const ApiRoutes = {
     add: 'flightPlan',
     update: 'flightPlan/:id',
     remove: 'flightPlan/:id',
-    getFlightPlanRoute: 'flightPlan/route/:id',
     getFlightPlanEnroute: 'flightPlan/route/time/:id'
   }
 }
