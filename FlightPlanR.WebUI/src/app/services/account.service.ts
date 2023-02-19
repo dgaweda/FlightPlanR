@@ -1,22 +1,49 @@
 import {Injectable} from "@angular/core";
-import {BaseApiService} from "./base.service";
+import {BaseApiService} from "../common/base.service";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {AuthenticateResponse} from "../models/authentication/authenticate-response.model";
 import {AuthenticateRequest} from "../models/authentication/authenticate-request.model";
 import {User} from "../models/user.model";
+import {Router} from "@angular/router";
+import {LocalStorageService} from "../common/localStorage.service";
 
 @Injectable()
 export class AccountService extends BaseApiService {
-  constructor(http: HttpClient) {
+  private readonly userKey: string = 'user';
+
+  private user$: BehaviorSubject<User | null>;
+  public user: Observable<User | null>;
+
+  constructor(http: HttpClient,
+    private router: Router,
+    private localStorageService: LocalStorageService)
+  {
     super(http);
+    this.user$ = new BehaviorSubject<User | null>(localStorageService.getUser())
+    this.user = this.user$.asObservable();
   }
 
-  authenticate(request: AuthenticateRequest): Observable<AuthenticateResponse> {
-    return this.post(this.apiRoutes.account.authenticate, request);
+  public get userValue(): User | null {
+    return this.user$.value;
   }
 
-  register(request: User): Observable<string> {
-    return this.post(this.apiRoutes.account.register, request);
+  public authenticate(request: AuthenticateRequest): Observable<User> {
+    return this.post<AuthenticateResponse>(this.apiRoutes.account.authenticate, request).pipe(map((authResponse: AuthenticateResponse) => {
+      const user = new User(authResponse);
+      this.localStorageService.setUser(user);
+      this.user$.next(user);
+      return user;
+    }));
+  }
+
+  public logout(): void {
+    this.localStorageService.removeUser();
+    this.user$.next(null);
+    this.router.navigate(['/home']);
+  }
+
+  public register(request: User): Observable<string> {
+    return this.post<string>(this.apiRoutes.account.register, request);
   }
 }

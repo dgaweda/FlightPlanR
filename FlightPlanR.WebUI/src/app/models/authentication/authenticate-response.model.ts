@@ -1,5 +1,5 @@
 export interface AuthenticateResponse {
-  id: string;
+  userId: string;
   firstName: string;
   lastName: string;
   userName: string;

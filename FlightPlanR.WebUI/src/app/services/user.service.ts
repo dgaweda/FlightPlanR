@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BaseApiService} from "./base.service";
+import {BaseApiService} from "../common/base.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user.model";
@@ -11,7 +11,7 @@ export class UserService extends BaseApiService {
   }
 
   getById(id: string): Observable<User> {
-    return this.get(this.apiRoutes.user.getById.replace('id', id));
+    return this.get(this.apiRoutes.user.getById.setId(id));
   }
 
   getByUsername(username: string): Observable<User> {
@@ -19,10 +19,10 @@ export class UserService extends BaseApiService {
   }
 
   updateUser(id: string, userData: User): Observable<void> {
-    return this.put(this.apiRoutes.user.update.setApiRouteId(id), userData);
+    return this.put(this.apiRoutes.user.update.setId(id), userData);
   }
 
   removeUser(id: string): Observable<void> {
-    return this.delete(this.apiRoutes.user.remove.setApiRouteId(id));
+    return this.delete(this.apiRoutes.user.remove.setId(id));
   }
 }

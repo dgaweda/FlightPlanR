@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ApiRoutes} from "../api.routes";
-import {environment} from "../../environments/environment";
+import { BaseComponent } from "./base.component";
 
 export const httpOptions = {
   headers: new HttpHeaders({
@@ -15,10 +15,11 @@ export const httpOptions = {
 };
 
 @Injectable()
-export class BaseApiService {
+export class BaseApiService extends BaseComponent {
   protected apiRoutes = ApiRoutes;
 
   constructor(protected http: HttpClient) {
+    super();
   }
 
   public get<T>(endpoint: string, params?: any, options?: any): Observable<T> {

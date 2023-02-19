@@ -19,5 +19,6 @@ public record RegisterUserRequest
 	public string Password { get; set; }
 
 	[BsonElement("is_admin")]
-	public bool IsAdmin { get; set; }
+	[JsonIgnore]
+	public bool IsAdmin { get; set; } = false;
 }
