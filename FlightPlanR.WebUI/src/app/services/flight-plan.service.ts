@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BaseApiService} from "../common/base.service";
+import {BaseApiService} from "../common/services/base.service";
 import {Observable} from "rxjs";
 import {FlightPlan} from "../models/flight-plan.model";
 

@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace FlightPlanApi.Controllers;
 
 [AllowAnonymous]
-public class AuthenticateController : BaseController
+public class AccountController : BaseController
 {
 	private readonly IAccountService _accountService;
 
-	public AuthenticateController(IAccountService accountService)
+	public AccountController(IAccountService accountService)
 	{
 		_accountService = accountService;
 	}

@@ -1,23 +1,24 @@
 import {environment} from "../environments/environment";
+import {ID_KEY} from "./common/constants";
 
 export const ApiRoutes = {
   baseUrl: `${environment.baseApiRoute}`,
   account: {
-    authenticate: 'authenticate',
-    register: 'register'
+    authenticate: `account/authenticate`,
+    register: `account/register`
   },
   user: {
-    getById: 'user/:id',
-    getByUserName: 'user',
-    update: 'user/:id',
-    remove: 'user/:id'
+    getById: `user/${ID_KEY}`,
+    getByUserName: `user`,
+    update: `user/${ID_KEY}`,
+    remove: `user/${ID_KEY}`
   },
   flightPlan: {
-    getAll: 'flightPlan',
-    getById: 'flightPlan/:id',
-    add: 'flightPlan',
-    update: 'flightPlan/:id',
-    remove: 'flightPlan/:id',
-    getFlightPlanEnroute: 'flightPlan/route/time/:id'
+    getAll: `flightPlan`,
+    getById: `flightPlan/${ID_KEY}`,
+    add: `flightPlan`,
+    update: `flightPlan/${ID_KEY}`,
+    remove: `flightPlan/${ID_KEY}`,
+    getFlightPlanEnroute: `flightPlan/route/time/${ID_KEY}`
   }
 }

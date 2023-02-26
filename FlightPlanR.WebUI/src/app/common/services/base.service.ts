@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {ApiRoutes} from "../api.routes";
-import { BaseComponent } from "./base.component";
+import {ApiRoutes} from "../../api.routes";
+import { BaseComponent } from "../base.component";
 
 export const httpOptions = {
   headers: new HttpHeaders({

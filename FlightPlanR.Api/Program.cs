@@ -15,11 +15,24 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfig();
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowedOrigins", policyBuilder =>
+    {
+        policyBuilder.WithOrigins(builder.Configuration["AllowedOrigins"])
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
 
 // Add custom services to the container.
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+});
 
 var app = builder.Build();
 
@@ -30,13 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/flightplanr/swagger.json", "FlightPlanR"));
 }
 
-app.UseCors(config =>
-{
-    config
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-});
+app.UseCors("AllowedOrigins");
 
 app.UseCustomeMiddlewares();
 app.UseHttpsRedirection();
