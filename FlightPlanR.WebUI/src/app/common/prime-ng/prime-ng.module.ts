@@ -6,6 +6,8 @@ import {MenubarModule} from "primeng/menubar";
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
+import {MenuModule} from "primeng/menu";
+import {MegaMenuModule} from "primeng/megamenu";
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import {CardModule} from "primeng/card";
     MenubarModule,
     ButtonModule,
     InputTextModule,
-    CardModule
+    CardModule,
+    MenuModule,
+    MegaMenuModule
   ],
   exports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import {CardModule} from "primeng/card";
     MenubarModule,
     ButtonModule,
     InputTextModule,
-    CardModule
+    CardModule,
+    MenuModule,
+    MegaMenuModule
   ]
 })
 export class PrimeNgComponentsModule { }

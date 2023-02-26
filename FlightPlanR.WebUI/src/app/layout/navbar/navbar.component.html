@@ -1,16 +1,15 @@
 <div class="w3-top background">
-  <p-menubar [model]="items">
+  <p-menubar [model]="pages">
     <ng-template pTemplate="end">
       <div class="d-inline-flex align-items-center">
-        <span *ngIf="user" pInputText>
-          <i class="pi pi-user"></i>
-          Logged as:
-          <strong>
-            {{ user?.firstName }}
-          </strong>
-        </span>
-        <button *ngIf="!isUserLoggedIn" pButton label="Log In" icon="pi pi-sign-in" [routerLink]="['/login']"></button>
-        <button *ngIf="isUserLoggedIn" pButton label="Log Out" icon="pi pi-sign-out" (click)="logOut()"></button>
+
+        <ng-container *ngIf="user">
+          <button type="button" pButton icon="pi pi-user" [label]="user.firstName!" (click)="menu.toggle($event)"></button>
+          <p-menu #menu [model]="userMenu" [popup]="true"></p-menu>
+        </ng-container>
+
+        <button *ngIf="!user" pButton label="Log In" icon="pi pi-sign-in" [routerLink]="['/login']"></button>
+
       </div>
     </ng-template>
   </p-menubar>
