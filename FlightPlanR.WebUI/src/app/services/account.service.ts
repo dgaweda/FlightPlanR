@@ -11,7 +11,7 @@ import {LocalStorageService} from "../common/services/local-storage.service";
 @Injectable({ providedIn: 'root' })
 export class AccountService extends BaseApiService {
   private user$: BehaviorSubject<User | null>;
-  public user: Observable<User | null>;
+  private readonly user: Observable<User | null>;
 
   constructor(
     http: HttpClient,
@@ -44,5 +44,9 @@ export class AccountService extends BaseApiService {
 
   public register(request: User): Observable<string> {
     return this.post<string>(this.apiRoutes.account.register, request);
+  }
+
+  public getCurrentUser(): Observable<User | null> {
+    return this.user;
   }
 }

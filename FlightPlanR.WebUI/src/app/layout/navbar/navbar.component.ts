@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem, PrimeIcons} from "primeng/api";
+import {AccountService} from "../../services/account.service";
+import {User} from "../../models/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +11,12 @@ import {MenuItem, PrimeIcons} from "primeng/api";
 })
 export class NavbarComponent implements OnInit {
   items: MenuItem[];
+  isUserLoggedIn: boolean = false;
+  protected user: User | null;
 
-  constructor() {
+  constructor(private accountService: AccountService, private router: Router) {
     this.items = [];
+    this.user = null;
   }
 
   ngOnInit(): void {
@@ -19,5 +25,25 @@ export class NavbarComponent implements OnInit {
       { label: 'Flight Plans', icon: PrimeIcons.ALIGN_JUSTIFY, routerLink: ['flight-plans']},
       { label: 'Administration', icon: PrimeIcons.USERS, routerLink: ['administration']}
     ]
+    this.userIsLoggedIn();
+  }
+
+  protected userIsLoggedIn(): void {
+    this.accountService.getCurrentUser()
+      .subscribe((user: User | null) => {
+        this.isUserLoggedIn = user != null;
+        if(this.isUserLoggedIn) {
+          this.user = user;
+          this.redirectToHomePage();
+        }
+      });
+  }
+
+  protected logOut(): void {
+    this.accountService.logout();
+  }
+
+  public redirectToHomePage(): void {
+    this.router.navigate(['home']);
   }
 }

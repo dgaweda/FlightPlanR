@@ -34,7 +34,7 @@ public class AccountService : IAccountService
 			UserId = user.Id,
 			LastName = user.LastName,
 			Token = await _jwtHandler.GenerateToken(user),
-			Username = user.Username
+			UserName = user.Username
 		};
 	}
 
