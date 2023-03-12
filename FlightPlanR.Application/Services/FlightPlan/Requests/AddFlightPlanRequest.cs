@@ -1,6 +1,5 @@
-﻿using FlightPlanR.Domain.Common;
+﻿using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 
 namespace FlightPlanR.Application.Services.FlightPlan.Requests;
 

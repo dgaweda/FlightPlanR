@@ -2,8 +2,6 @@
 using FlightPlanR.Infrastructure.Common.Configuration;
 using FlightPlanR.Infrastructure.Repository.FlightPlanRepository;
 using FlightPlanR.Infrastructure.Repository.User;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 
 namespace FlightPlanR.Infrastructure;

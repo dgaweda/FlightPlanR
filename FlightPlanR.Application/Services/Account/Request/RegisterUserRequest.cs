@@ -1,5 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace FlightPlanR.Application.Services.Account.Request;
 

@@ -1,5 +1,8 @@
 ﻿using FlightPlanApi.Common.Exceptions;
+using FlightPlanR.Application.Common.Exceptions;
+using FlightPlanR.Application.Common.Extensions;
 using FlightPlanR.DataAccess.Entity;
+using FlightPlanR.Domain.Entities;
 using FlightPlanR.Tests.Common.FakeModels;
 using FluentAssertions;
 using MongoDB.Driver;
