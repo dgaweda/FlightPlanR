@@ -9,10 +9,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { FlightPlansComponent } from './pages/flight-plans/flight-plans.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { LoginComponent } from './pages/login/login.component';
-import { PrimeNgComponentsModule } from "./common/prime-ng/prime-ng.module";
+import { PrimeNgComponentsModule } from "./common/prime-ng.module";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {StyleClassModule} from "primeng/styleclass";
+import {JwtInterceptor} from "./common/interceptors/jwt.interceptor";
+import {ErrorInterceptor} from "./common/interceptors/error.interceptor";
+import {NotificationComponent} from "./components/notification/notification.component";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import {StyleClassModule} from "primeng/styleclass";
     HomeComponent,
     FlightPlansComponent,
     AdministrationComponent,
-    LoginComponent
+    LoginComponent,
+    NotificationComponent
   ],
   imports: [
     AppRoutingModule,
@@ -35,7 +40,11 @@ import {StyleClassModule} from "primeng/styleclass";
     AppRoutingModule,
     PrimeNgComponentsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    MessageService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

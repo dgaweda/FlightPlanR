@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
-import {BaseApiService} from "../common/services/base.service";
+import {BaseApiService} from "../common/base.service";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {AuthenticateResponse} from "../models/authentication/authenticate-response.model";
 import {AuthenticateRequest} from "../models/authentication/authenticate-request.model";
 import {User} from "../models/user.model";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../common/services/local-storage.service";
+import {LocalStorageService} from "./local-storage.service";
 
 @Injectable({ providedIn: 'root' })
 export class AccountService extends BaseApiService {

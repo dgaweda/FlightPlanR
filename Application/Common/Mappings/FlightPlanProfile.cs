@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FlightPlanR.Application.Common.Extensions;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
 using FlightPlanR.Domain.Entities;
 
@@ -9,8 +10,8 @@ public class FlightPlanProfile : Profile
 	public FlightPlanProfile()
 	{
 		CreateMap<AddFlightPlanRequest, FlightPlan>()
-			.ForMember(src => src.Id, opt => opt.Ignore());
+			.IgnoreDestinationMember(src => src.Id);
 		CreateMap<UpdateFlightPlanRequest, FlightPlan>()
-			.ForMember(src => src.Id, opt => opt.Ignore());
+			.IgnoreDestinationMember(src => src.Id);
 	}
 }

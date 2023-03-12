@@ -23,8 +23,8 @@ public class AccountService : IAccountService
 
 	public async Task<AuthenticateDto> Authenticate(AuthenticateRequest request)
 	{
-		var user = await _userRepository.FindByUsername(request.Username)
-			.ThrowIfOperationFailed();
+		var user = await _userRepository.FindByUsername(request.Username).ThrowLoginFailed();
+		
 		if (user is null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
 			throw new IdentityException("Username or password is incorrect");
 

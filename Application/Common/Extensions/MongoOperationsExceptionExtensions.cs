@@ -46,7 +46,18 @@ public static class MongoOperationsExceptionExtensions
 		var result = await resultTask;
 		if (result is null)
 		{
-			throw new NotFoundException("Document not found.");
+			throw new NotFoundException("Document not found");
+		}
+
+		return result;
+	}
+
+	public static async Task<TResult> ThrowLoginFailed<TResult>(this Task<TResult> resultTask)
+	{
+		var result = await resultTask;
+		if (result is null)
+		{
+			throw new NotFoundException("Login failed. User not exists.");
 		}
 
 		return result;

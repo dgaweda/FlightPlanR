@@ -8,6 +8,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
 import {MenuModule} from "primeng/menu";
 import {MegaMenuModule} from "primeng/megamenu";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {MegaMenuModule} from "primeng/megamenu";
     InputTextModule,
     CardModule,
     MenuModule,
-    MegaMenuModule
+    MegaMenuModule,
+    ToastModule
   ],
   exports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import {MegaMenuModule} from "primeng/megamenu";
     InputTextModule,
     CardModule,
     MenuModule,
-    MegaMenuModule
+    MegaMenuModule,
+    ToastModule
   ]
 })
 export class PrimeNgComponentsModule { }
