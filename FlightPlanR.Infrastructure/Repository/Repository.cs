@@ -13,13 +13,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     private readonly IMongoDatabase _database;
     protected readonly IMongoCollection<TEntity> Collection;
 
-    public Repository(MongoConfiguration configuration, IMongoClient mongoClient)
+    protected Repository(MongoConfiguration configuration, IMongoClient mongoClient)
     {
         _database = mongoClient.GetDatabase(configuration.DbName);
         Collection = GetCollection();
     }
-    
-    protected IMongoCollection<TEntity> GetCollection() =>
+
+    private IMongoCollection<TEntity> GetCollection() =>
         _database.GetCollection<TEntity>(GetCollectionName());
 
     private string GetCollectionName() => typeof(TEntity).GetAttributeFromClass<MongoCollectionAttribute>().CollectionName;

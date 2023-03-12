@@ -1,6 +1,7 @@
 using FlightPlanApi;
 using FlightPlanApi.Middleware;
 using FlightPlanR.Application;
+using FlightPlanR.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
