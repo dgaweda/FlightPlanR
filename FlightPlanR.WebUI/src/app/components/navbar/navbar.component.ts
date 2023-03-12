@@ -3,18 +3,20 @@ import {MegaMenuItem, MenuItem, PrimeIcons} from "primeng/api";
 import {AccountService} from "../../services/account.service";
 import {User} from "../../models/user.model";
 import {Router} from "@angular/router";
+import {BaseComponent} from "../../common/base.component";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent extends BaseComponent implements OnInit {
   pages: MenuItem[];
   userMenu: MenuItem[];
   protected user: User | null;
 
   constructor(private accountService: AccountService, private router: Router) {
+    super();
     this.pages = [];
     this.userMenu = [];
     this.user = null;
@@ -27,13 +29,15 @@ export class NavbarComponent implements OnInit {
   }
 
   protected userIsLoggedIn(): void {
-    this.accountService.getCurrentUser()
-      .subscribe((user: User | null) => {
+    this.subscribe(this.accountService.getCurrentUser(), {
+      next: (user: User | null) => {
         this.user = user;
-        if(user) {
+        if (user) {
           this.redirectToHomePage();
+          this.setPages();
         }
-      });
+      }
+    })
   }
 
   protected logOut(): void {
@@ -50,6 +54,7 @@ export class NavbarComponent implements OnInit {
           icon: PrimeIcons.SIGN_OUT,
           command: () => {
             this.logOut();
+            this.setPages();
           }
         },
         { label: 'Profile', icon: PrimeIcons.USER_EDIT}
@@ -59,8 +64,8 @@ export class NavbarComponent implements OnInit {
   private setPages(): void {
     this.pages = [
       { label: 'Home', icon: PrimeIcons.HOME, routerLink: ['home'] },
-      { label: 'Flight Plans', icon: PrimeIcons.ALIGN_JUSTIFY, routerLink: ['flight-plans']},
-      { label: 'Administration', icon: PrimeIcons.USERS, routerLink: ['administration']}
+      { label: 'Flight Plans', icon: PrimeIcons.ALIGN_JUSTIFY, routerLink: ['flight-plans'], visible: !!this.user},
+      { label: 'Administration', icon: PrimeIcons.USERS, routerLink: ['administration'], visible: !!this.user}
     ]
   }
 }

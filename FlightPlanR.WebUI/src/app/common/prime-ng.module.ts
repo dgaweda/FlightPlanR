@@ -9,6 +9,8 @@ import {CardModule} from "primeng/card";
 import {MenuModule} from "primeng/menu";
 import {MegaMenuModule} from "primeng/megamenu";
 import {ToastModule} from "primeng/toast";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {ProgressBarModule} from "primeng/progressbar";
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import {ToastModule} from "primeng/toast";
     CardModule,
     MenuModule,
     MegaMenuModule,
-    ToastModule
+    ToastModule,
+    ProgressSpinnerModule,
+    ProgressBarModule
   ],
   exports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import {ToastModule} from "primeng/toast";
     CardModule,
     MenuModule,
     MegaMenuModule,
-    ToastModule
+    ToastModule,
+    ProgressSpinnerModule,
+    ProgressBarModule
   ]
 })
 export class PrimeNgComponentsModule { }

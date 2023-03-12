@@ -19,9 +19,7 @@ export class LoginComponent extends BaseComponent {
   }
 
   public login(): void {
-    this.subscribe(this.accountService.authenticate(this.authenticateRequest), {
-      next: (user: User) => console.log(user)
-    });
+    this.subscribe(this.accountService.authenticate(this.authenticateRequest));
   }
 
   public redirectToRegister(): void {
