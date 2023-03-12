@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://www.w3schools.com/w3css/4/w3.css');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import "~bootstrap/dist/css/bootstrap.css";
+@import 'bootstrap-base.scss';
+@import 'layout.scss';
+@import 'navbar.scss';
+@import 'prime-ng.buttons.scss';
+@import 'prime-ng.card.scss';
+
+body {
+  min-height: 100%;
+  display:flex;
+  flex-direction: column;
+  background: #183462;
+  color: white;
+}
+
+.is-active {
+  background: white;
+  font-weight: bold;
+  color: black !important;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Lato", sans-serif;
+}
+
+a {
+  font-weight: bold;
+}
+
+a:link, a:visited {
+  color: #46a215;
+  font-weight: bold;
+  font-style: normal;
+  text-decoration: none;
+}
+
+a:focus, a:hover {
+  color: lighten(#46a215, 30%);
+}
