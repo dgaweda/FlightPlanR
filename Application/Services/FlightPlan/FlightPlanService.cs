@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.ObjectModel;
+using AutoMapper;
 using FlightPlanR.Application.Common.Extensions;
 using FlightPlanR.Application.Common.Interfaces;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
@@ -62,5 +63,11 @@ public class FlightPlanService : IFlightPlanService
 
         var enrouteTime = flightPlan.DepartureTime - flightPlan.ArrivalTime;
         return enrouteTime;
+    }
+
+    public async Task UpsertManyAsync(List<UpsertFlightPlansRequest> request)
+    {
+        var flightPlans = _mapper.Map<List<Domain.Entities.FlightPlan>>(request);
+        await _flightPlanRepository.UpsertManyAsync(flightPlans).ThrowIfOperationFailed();
     }
 }

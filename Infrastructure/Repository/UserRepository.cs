@@ -8,8 +8,7 @@ public class UserRepository : Repository<Domain.Entities.User>, IUserRepository
 {
 	public UserRepository(MongoConfiguration configuration, IMongoClient mongoClient) 
 		: base(configuration, mongoClient)
-	{
-	}
+	{ }
 
 	public async Task<Domain.Entities.User> FindByUsername(string username)
 	{
@@ -18,7 +17,7 @@ public class UserRepository : Repository<Domain.Entities.User>, IUserRepository
 		return user ?? null;
 	}
 
-	public async Task<bool> CheckIfUsernameIsTaken(string username)
+	public async Task<bool> UserAlreadyTaken(string username)
 	{
 		var user = await FindByUsername(username);
 		return user is null;

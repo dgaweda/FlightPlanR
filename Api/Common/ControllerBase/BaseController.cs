@@ -7,6 +7,4 @@ namespace FlightPlanApi.Controllers.Base;
 [ApiController]
 [Authorize]
 public class BaseController : ControllerBase
-{
-    
-}
+{ }

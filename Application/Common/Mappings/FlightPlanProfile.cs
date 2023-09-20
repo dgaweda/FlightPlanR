@@ -10,8 +10,10 @@ public class FlightPlanProfile : Profile
 	public FlightPlanProfile()
 	{
 		CreateMap<AddFlightPlanRequest, FlightPlan>()
-			.IgnoreDestinationMember(src => src.Id);
+			.IgnoreDestinationMember(dest => dest.Id);
 		CreateMap<UpdateFlightPlanRequest, FlightPlan>()
-			.IgnoreDestinationMember(src => src.Id);
+			.IgnoreDestinationMember(dest => dest.Id);
+		CreateMap<UpsertFlightPlansRequest, FlightPlan>()
+			.IgnoreDestinationMember(dest => dest.Id);
 	}
 }

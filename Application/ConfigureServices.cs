@@ -12,7 +12,7 @@ public static class DependencyInjection
   public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
   {
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-    services.AddJSONWebTokenAuthentication(configuration);
+    services.AddJWTAuth(configuration);
     services.AddScoped<IFlightPlanService, FlightPlanService>();
     services.AddScoped<IUserService, UserService>();
     services.AddScoped<IAccountService, AccountService>();

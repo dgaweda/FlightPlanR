@@ -1,4 +1,5 @@
-﻿using FlightPlanR.Application.Services.FlightPlan.Requests;
+﻿using System.Collections.ObjectModel;
+using FlightPlanR.Application.Services.FlightPlan.Requests;
 
 namespace FlightPlanR.Application.Services.FlightPlan;
 
@@ -10,4 +11,5 @@ public interface IFlightPlanService
     Task<string> UpdateAsync(string id, UpdateFlightPlanRequest request);
     Task RemoveAsync(string flightPlanId);
     Task<TimeSpan?> GetFlightPlanEnroute(string flightPlanId);
+    Task UpsertManyAsync(List<UpsertFlightPlansRequest> request);
 }

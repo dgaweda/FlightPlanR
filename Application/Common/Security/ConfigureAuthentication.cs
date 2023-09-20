@@ -10,7 +10,7 @@ namespace FlightPlanR.Application.Common.Security;
 public static class ConfigureAuthentication
 {
 	private static readonly string JwtSection = "Jwt";
-	public static IServiceCollection AddJSONWebTokenAuthentication(this IServiceCollection services, IConfiguration configuration)
+	public static IServiceCollection AddJWTAuth(this IServiceCollection services, IConfiguration configuration)
 	{
 		var jwtOptions = new JwtOptions();
 		configuration.GetSection(JwtSection).Bind(jwtOptions);

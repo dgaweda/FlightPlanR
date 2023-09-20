@@ -1,11 +1,14 @@
+using System.Collections.ObjectModel;
 using FlightPlanApi.Controllers.Base;
 using FlightPlanR.Application.Services.FlightPlan;
 using FlightPlanR.Application.Services.FlightPlan.Requests;
+using FlightPlanR.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightPlanApi.Controllers;
 
+[Route("api/flight-plan")]
 public class FlightPlanController : BaseController
 {
     private readonly IFlightPlanService _flightPlanService;
@@ -23,7 +26,7 @@ public class FlightPlanController : BaseController
     }
     
     [HttpGet("{documentId}")]
-    public async Task<IActionResult> FindById([FromRoute] string documentId)
+    public async Task<IActionResult> FindById(string documentId)
     {
         return Ok(await _flightPlanService.FindByIdAsync(documentId));
     }
@@ -42,16 +45,24 @@ public class FlightPlanController : BaseController
     }
     
     [HttpDelete("{documentId}")]
-    public async Task<IActionResult> Delete([FromRoute] string documentId)
+    public async Task<IActionResult> Delete(string documentId)
     {
         await _flightPlanService.RemoveAsync(documentId);
         return Ok();
     }
 
     [HttpGet("route/time/{documentId}")]
-    public async Task<IActionResult> GetFlightPlanTimeEnroute([FromRoute] string documentId)
+    public async Task<IActionResult> GetFlightPlanTimeEnroute(string documentId)
     {
         return Ok(await _flightPlanService.GetFlightPlanEnroute(documentId));
+    }
+
+    [HttpPost("upsert-many")]
+    [AllowAnonymous]
+    public async Task<IActionResult> UpsertMany([FromBody] List<UpsertFlightPlansRequest> request)
+    {
+        await _flightPlanService.UpsertManyAsync(request);
+        return Ok();
     }
 }
 

@@ -19,12 +19,12 @@ public class ErrorHandlerMiddleware
         {
             await _next.Invoke(context);
         }
-        catch (Exception error)
+        catch (Exception exception)
         {
             var response = context.Response;
             response.ContentType = "application/json";
             
-            switch (error)
+            switch (exception)
             {
                 case IdentityException:
                     response.StatusCode = (int)HttpStatusCode.Unauthorized;
@@ -35,25 +35,16 @@ public class ErrorHandlerMiddleware
                 case BadRequestException:
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     break;
-                case NotUpdatedException ex:
+                case NotUpdatedException or NoContentException:
                     response.StatusCode = (int)HttpStatusCode.NotModified;
-                    await response.WriteAsync(SerializeMessage(ex));
-                    Console.WriteLine(CreateMessage(ex));
-                    await _next.Invoke(context);
-                    break;
-                case NoContentException ex:
-                    response.StatusCode = (int)HttpStatusCode.NotModified;
-                    await response.WriteAsync(SerializeMessage(ex));
-                    Console.WriteLine(CreateMessage(ex));
-                    await _next.Invoke(context);
                     break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
             }
             
-            await response.WriteAsync(SerializeMessage(error));
-            Console.WriteLine(CreateMessage(error));
+            await response.WriteAsync(SerializeMessage(exception));
+            Console.WriteLine(CreateMessage(exception));
         }
     }
 
