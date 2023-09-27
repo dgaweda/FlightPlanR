@@ -7,14 +7,14 @@ import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent,
-    title: 'FlightPlanR - Home'
-  },
-  {
     path: 'flight-plans',
     component: FlightPlansComponent,
     title: 'FlightPlanR - Flight Plans'
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    title: 'FlightPlanR - Home'
   },
   {
     path: 'administration',

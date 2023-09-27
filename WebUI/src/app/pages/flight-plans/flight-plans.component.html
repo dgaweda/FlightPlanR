@@ -1,1 +1,39 @@
-<p>flight-plans works!</p>
+
+<p-table [value]="flightPlans" [tableStyle]="{ 'min-width': '135rem' }" styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped p-datatable-loading-icon">
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center">Aircraft Identification</th>
+      <th class="text-center">Aircraft Type</th>
+      <th class="text-center">Air Speed</th>
+      <th class="text-center">Altitude</th>
+      <th class="text-center">Flight Type</th>
+      <th class="text-center">Fuel Hours</th>
+      <th class="text-center">Fuel Minutes</th>
+      <th class="text-center">Departure Time</th>
+      <th class="text-center">Arrival Time</th>
+      <th class="text-center">Departure Airport</th>
+      <th class="text-center">Arrival Airport</th>
+      <th class="text-center">Route</th>
+      <th class="text-center">Remarks</th>
+      <th class="text-center">Number On Board</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-flightPlan>
+    <tr>
+      <td class="text-center">{{ flightPlan.aircraftIdentification }}</td>
+      <td class="text-center">{{ flightPlan.aircraftType }}</td>
+      <td class="text-center">{{ flightPlan.airSpeed }}</td>
+      <td class="text-center">{{ flightPlan.altitude }}</td>
+      <td class="text-center">{{ flightPlan.flightType }}</td>
+      <td class="text-center">{{ flightPlan.fuelHours }}</td>
+      <td class="text-center">{{ flightPlan.fuelMinutes }}</td>
+      <td class="text-center">{{ flightPlan.departureTime | date:'short' }}</td>
+      <td class="text-center">{{ flightPlan.arrivalTime | date:'short' }}</td>
+      <td class="text-center">{{ flightPlan.departureAirport }}</td>
+      <td class="text-center">{{ flightPlan.arrivalAirport }}</td>
+      <td class="text-center">{{ flightPlan.route }}</td>
+      <td class="text-center">{{ flightPlan.remarks }}</td>
+      <td class="text-center">{{ flightPlan.numberOnBoard }}</td>
+    </tr>
+  </ng-template>
+</p-table>

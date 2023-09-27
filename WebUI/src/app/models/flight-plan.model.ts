@@ -1,7 +1,7 @@
 export interface FlightPlan {
   id: string;
   aircraftIdentification: string;
-  aircraftSpeed: string;
+  aircraftType: string;
   airSpeed: number;
   altitude: number;
   flightType: string;

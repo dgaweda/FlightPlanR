@@ -14,11 +14,11 @@ export const ApiRoutes = {
     remove: `user/${ID_KEY}`
   },
   flightPlan: {
-    getAll: `flightPlan`,
-    getById: `flightPlan/${ID_KEY}`,
-    add: `flightPlan`,
-    update: `flightPlan/${ID_KEY}`,
-    remove: `flightPlan/${ID_KEY}`,
-    getFlightPlanEnroute: `flightPlan/route/time/${ID_KEY}`
+    getAll: `flight-plan`,
+    getById: `flight-plan/${ID_KEY}`,
+    add: `flight-plan`,
+    update: `flight-plan/${ID_KEY}`,
+    remove: `flight-plan/${ID_KEY}`,
+    getFlightPlanEnroute: `flight-plan/route/time/${ID_KEY}`
   }
 }

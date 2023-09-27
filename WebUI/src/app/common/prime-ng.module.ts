@@ -11,6 +11,7 @@ import {MegaMenuModule} from "primeng/megamenu";
 import {ToastModule} from "primeng/toast";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ProgressBarModule} from "primeng/progressbar";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {ProgressBarModule} from "primeng/progressbar";
     MegaMenuModule,
     ToastModule,
     ProgressSpinnerModule,
-    ProgressBarModule
+    ProgressBarModule,
+    TableModule
   ],
   exports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import {ProgressBarModule} from "primeng/progressbar";
     MegaMenuModule,
     ToastModule,
     ProgressSpinnerModule,
-    ProgressBarModule
+    ProgressBarModule,
+    TableModule
   ]
 })
 export class PrimeNgComponentsModule { }

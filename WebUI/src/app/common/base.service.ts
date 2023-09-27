@@ -3,6 +3,7 @@ import {map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ApiRoutes} from "../api.routes";
 import { BaseComponent } from "./base.component";
+import {environment} from "../../environments/environment";
 
 export const httpOptions = {
   headers: new HttpHeaders({
